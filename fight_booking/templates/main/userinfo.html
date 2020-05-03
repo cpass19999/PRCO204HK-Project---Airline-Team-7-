@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>UserINFO</h1>
+</div>
+
+ <div>
+     {% if user.address %}
+        <p>{{user.user_fullname}} live in {{ user.address }}</p>
+     {% endif %}
+
+     {% if user.contactNo %}
+        <p>contact Number :{{ user.contactNo }}</p>
+     {% endif %}
+
+      <div class="post-editor">
+            <a href="{{ url_for('main.edituserinfo') }}">Edit</a>
+      </div>
+
+
+</div>
+<div>
+    {% if user.bookings %}
+        <div>
+            <ul>
+                {% for booking in user.bookings %}
+                    <li> Booking date {{ booking.create_date }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}
