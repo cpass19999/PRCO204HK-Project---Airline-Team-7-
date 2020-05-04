@@ -1,17 +1,24 @@
 from fight_booking.main import main
-from fight_booking import app
+from fight_booking import app, decorator_permission
 from. import flight
 from fight_booking import db
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import login_required, current_user
 from fight_booking.flight.form import Form_Testbooking, From_search_flight, From_book_confirm
 from .model import Flight, Booking
+from ..user.form import FormFunc
+from ..user.model import Func
 
 
 @flight.route('/flight/t', methods=['GET', 'POST'])
+@decorator_permission.decorator_permission
 @login_required
-def booking_test():
+def add_booking_user():
     """使用者編輯blog"""
+    #if not current_user.check_admin('fight_booking.view','add_booking_user'):
+       # flash('You Have No Author!')
+        #return redirect(url_for('main.index'))
+
     form = Form_Testbooking()
     if form.validate_on_submit():
         book = Booking(
@@ -22,8 +29,14 @@ def booking_test():
         db.session.add(book)
         db.session.commit()
         flash('Create New Blog Success')
-        return redirect(url_for('main.userinfo', username=current_user.user_username))
+        #return redirect(url_for('main.userinfo', username=current_user.user_username))
     return render_template('flight_main/bookingtest.html', form=form)
+
+@flight.route('/flight_test/')
+@decorator_permission.decorator_permission
+@login_required
+def flight_test():
+    return 'i am test route'
 
 @flight.route('/searchflight', methods=['GET', 'POST'])
 def search_flight():
@@ -81,3 +94,4 @@ def book_confirm(flight_ID):
         return redirect(url_for('main.userinfo', username=current_user.user_username))
 
     return render_template("flight_main/book_confirm.html" , flight = flight, form = form)
+

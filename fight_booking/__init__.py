@@ -2,7 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 from flask_bcrypt import Bcrypt
-from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager, Command, Shell
 from flask_mail import Mail
 from flask_login import LoginManager
 
@@ -19,12 +20,15 @@ bcrypt = Bcrypt(app)
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 mail = Mail(app)
+
+manager = Manager(app)
 migrate = Migrate(app, db)
+manager.add_command('db', MigrateCommand)
 
 login = LoginManager(app)
 login.login_view = 'user.login'
 
-
+from . import decorator_permission
 db.drop_all()
 #from fight_booking import model
 #db.session.commit()
@@ -36,4 +40,8 @@ app.register_blueprint(main, url_prefix='/main')
 from fight_booking.flight import flight
 app.register_blueprint(flight, url_prefix='/flight')
 
+
+
 db.create_all()
+
+from . import addrole

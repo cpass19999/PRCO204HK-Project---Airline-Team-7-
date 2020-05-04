@@ -109,3 +109,29 @@ class FormResetPassword(Form):
     ])
     submit = SubmitField('Reset Password')
 
+
+class FormFunc(Form):
+    """ViewFunction註冊用表單"""
+    func_module_name = StringField('func_module_name', validators=[
+        validators.DataRequired(),
+        validators.Length(max=50, message="Max Length equal 50")
+    ])
+    func_description = StringField('func_description', validators=[
+        validators.DataRequired(),
+        validators.Length(max=100, message="Max Length equal 100")
+    ])
+    func_is_activate = BooleanField('is_activate', default="checked")
+    func_remark = StringField('func_remark', validators=[
+        validators.DataRequired(),
+        validators.Length(max=100, message="Max Length equal 100")
+    ])
+    submit = SubmitField('Add New View Function')
+
+class FormRole(Form):
+    """Role角色管理用表單"""
+    name = StringField('role_name', validators=[
+        validators.DataRequired(),
+        validators.Length(max=50, message='Max Length equal 50')
+    ])
+
+    submit = SubmitField('Add New Role')

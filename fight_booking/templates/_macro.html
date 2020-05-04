@@ -1,0 +1,18 @@
+<!---  分頁功能  --->
+<!---  paginate_obj:要迭代的物件  --->
+<!---  endpoint:要迭代的目標endpoint  --->
+{% macro macro_paginate(paginate_obj, endpoint) -%}
+    <div class="post-paginate">
+        {% for page in paginate_obj.iter_pages() %}
+            {% if page %}
+                {% if page != paginate_obj.page %}
+                    <a href="{{ url_for(endpoint,  page=page, **kwargs) }}">{{ page }}</a>
+                {% else %}
+                    page: <strong>{{ page }}</strong>
+                {% endif %}
+            {% else %}
+                <span class=ellipsis>…</span>
+            {% endif %}
+        {% endfor %}
+    <div>
+{%- endmacro %}

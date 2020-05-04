@@ -13,13 +13,15 @@ class Form_Testbooking(Form):
         validators.DataRequired(),
         validators.Length(1, 30)
     ])
-    flightNo = StringField('flightNo', validators=[
-        validators.Length(0, 300)
+    user_id = StringField('User id', validators=[
+        validators.DataRequired(),
+        validators.Length(1, 30)
     ])
 
     seat_no = IntegerField('seatNo', validators=[
          validators.NumberRange(1,250)])
-    submit = SubmitField('Create Blog')
+
+    submit = SubmitField('Add booking')
 
 class From_search_flight(Form):
 

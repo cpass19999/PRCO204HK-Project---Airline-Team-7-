@@ -118,9 +118,9 @@ def before_request():
     條件三：endpoint不等於static，這是避免靜態資源的取用異常，如icon、js、css等..
     :return:
     """
-    if (current_user.is_authenticated and
+    if (    current_user.is_authenticated and
             not current_user.user_confirm and
-            request.endpoint not in ['re_userconfirm', 'logout', 'user_confirm', 'resetpassword'] and
+            request.endpoint not in ['user.re_userconfirm', 'user.logout', 'user.user_confirm', 'user.resetpassword'] and
             request.endpoint != 'static'):
         #  條件滿足就引導至未啟動說明
         flash('Hi, please activate your account first.')

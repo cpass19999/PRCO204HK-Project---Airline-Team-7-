@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% block title %}
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
-	{% endblock %}
+        <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+    <title>{{ title }}</title>
 </head>
 
 <body>
@@ -37,6 +40,10 @@
                     <li><a href="{{ url_for('user.login') }}">LOGIN</a></li>
                     {% endif %}
 
+                    {% if current_user.roles.id == [ADMIN] %}
+                    <li><a href="{{ url_for('flight.add_booking_user') }}">Book fo other</a></li>
+                    {% endif %}
+
                 </ul>
             </div>
         </div>
@@ -53,16 +60,8 @@
         {% block  content %}
         {% endblock %}
 
-        <div>
-        <footer>
-            <p>&copy; {{ year }} </p>
-        </footer>
-        </div>
     </div>
 
-    <script src="/static/scripts/jquery-1.10.2.js"></script>
-    <script src="/static/scripts/bootstrap.js"></script>
-    <script src="/static/scripts/respond.js"></script>
     {% block scripts %}{% endblock %}
 
 </body>

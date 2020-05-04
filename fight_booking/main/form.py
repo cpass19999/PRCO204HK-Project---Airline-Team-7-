@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, SubmitField, validators, SelectField, TextAreaField
+from wtforms import StringField, SubmitField, validators, SelectField, TextAreaField, SelectMultipleField ,widgets
 from wtforms.fields.html5 import EmailField
 
 
@@ -34,3 +34,22 @@ class FormUserInfo(Form):
         validators.DataRequired()
      ], choices=[('F', 'Female'), ('M', 'Man')])
     submit = SubmitField('Submit UserInfo')
+
+    #  建立MultiCheckboxField
+class MultiCheckboxField(SelectMultipleField):
+        widget = widgets.ListWidget(prefix_label=False)
+        option_widget = widgets.CheckboxInput()
+
+class FormRole_Func_manager(Form):
+        """
+        角色權限管理界面
+        """
+        all_function_option = MultiCheckboxField('all_function', coerce=int)
+        submit = SubmitField('submit')
+
+class Form_User_Role_manager(Form):
+    """
+    使用者角色管理界面
+    """
+    all_role_option = MultiCheckboxField('all_role', coerce=int)
+    submit = SubmitField('submit')
