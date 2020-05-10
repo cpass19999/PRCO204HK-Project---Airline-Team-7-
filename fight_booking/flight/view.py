@@ -4,7 +4,7 @@ from. import flight
 from fight_booking import db
 from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import login_required, current_user
-from fight_booking.flight.form import Form_Testbooking, From_search_flight, From_book_confirm
+from fight_booking.flight.form import Form_Testbooking, From_search_flight, From_book_confirm, From_book_flight
 from .model import Flight, Order
 from ..user.form import FormFunc
 from ..user.model import Func
@@ -73,6 +73,8 @@ def search_flight_result(f_place,t_place):
         trip = 'Round  trip'
         flights_1 = Flight.query.filter_by(from_place=f_place, to_place=t_place, depart_Date = depart_date, available = 'Upcoming').all()
         flights_2 = Flight.query.filter_by(from_place=t_place, to_place=f_place, depart_Date = return_date, available = 'Upcoming').all()
+
+
     return render_template('flight_main/search_result.html',flights_1= flights_1, flights_2 = flights_2 ,columns=columns, trip = trip , triptype = triptype)
 
 @flight.route('/flightInfo/<flight_ID>/', methods=['GET', 'POST'])
@@ -93,11 +95,16 @@ def order_detail(order_id):
     order = Order.query.filter_by().first_or_404()
     return render_template('booking_main/booking_detail.html', orders = orders, order = order)
 
-@flight.route('/Orderconfirm/<flight_ID>', methods=['GET', 'POST'])
+@flight.route('/Orderconfirm/' , methods=['GET','POST'])
 @login_required
-def book_confirm(flight_ID):
-    flight = Flight.query.filter_by(flightID=flight_ID).first_or_404()
+def book_confirm():
     form = From_book_confirm()
+
+    if request.method == 'POST':
+        depart_id = request.form.get('depart_id', None)
+        flash(depart_id)
+        flight = Flight.query.filter_by(flightID=depart_id).first_or_404()
+
 
     if form.validate_on_submit():
         book = Order(

@@ -1,4 +1,5 @@
 {% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 
 <h1>Search Result</h1>
@@ -7,6 +8,7 @@
     Triptype : {{ trip }}
 </div>
 
+<form action="{{ url_for('flight.book_confirm') }}" method="post">
 
 <div class="Search-result-from">
     <table class="table">
@@ -25,6 +27,7 @@
             <td>{{ flight.depart_Date }}</td>
             <td>{{ flight.depart_Time }}</td>
             <td>{{ flight.price }}</td>
+            <td><input type="radio" name="depart_id" id="depart_id" value="{{flight.flightID}}"></td>
             </tr>
         {% endfor %}
     </table>
@@ -32,17 +35,17 @@
 
 
 {%if triptype == 'return'%}
-{% if flights_2%}
-<div class="Search-result-return">
-    <h3>return </h3>
-    <table class="table">
-        <thead>
-            <tr>
+    {% if flights_2%}
+        <div class="Search-result-return">
+            <h3>return </h3>
+            <table class="table">
+            <thead>
+                <tr>
                 {% for column in columns %}
                 <th>{{ column }}</th>
                 {% endfor %}
-            </tr>
-        </thead>
+                </tr>
+            </thead>
         {% for flight in flights_2 %}
         <tr>
             <td>{{ flight.airlineName }}</td>
@@ -56,11 +59,18 @@
     </table>
 </div>
 {% else %}
-<div class="Search-result-return">
-    <h3>return </h3>
-    <h3>No result</h3>
-</div>
+    <div class="Search-result-return">
+        <h3>return </h3>
+        <h3>No result</h3>
+    </div>
+    {% endif %}
 {% endif %}
+
+
+{% if flights_1 %}
+    <button type="submit">Submit</button>
 {% endif %}
+
+</form>
 
 {% endblock %}

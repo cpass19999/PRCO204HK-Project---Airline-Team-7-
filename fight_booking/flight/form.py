@@ -54,3 +54,7 @@ class From_book_confirm(Form):
     seat_no = IntegerField('seatNo', validators=[
         validators.NumberRange(1, 250)])
     submit = SubmitField('confirm')
+
+
+class From_book_flight(Form):
+    submit = SubmitField('confirm')
