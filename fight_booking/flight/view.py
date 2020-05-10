@@ -2,10 +2,10 @@ from fight_booking.main import main
 from fight_booking import app, decorator_permission
 from. import flight
 from fight_booking import db
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import login_required, current_user
 from fight_booking.flight.form import Form_Testbooking, From_search_flight, From_book_confirm
-from .model import Flight, Booking
+from .model import Flight, Order
 from ..user.form import FormFunc
 from ..user.model import Func
 
@@ -21,7 +21,7 @@ def add_booking_user():
 
     form = Form_Testbooking()
     if form.validate_on_submit():
-        book = Booking(
+        book = Order(
             flight_id=form.flight_id.data,
             user_id=current_user.user_id,
             seat_no = form.seat_no.data
@@ -42,19 +42,38 @@ def flight_test():
 def search_flight():
     form = From_search_flight()
     if form.validate_on_submit():
-        flights = Flight.query.all()
-        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data).all()
-        if flight:
-            #search_flight_result(form.from_place.data,form.to_place.data)
-            return redirect(url_for('flight.search_flight_result', f_place =form.from_place.data , t_place = form.to_place.data))
-        flash ('No flight found ' )
+        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data,available = 'Upcoming').all()
+        triptype = form.TripType.data
+
+        if form.return_date.data > form.depart_date.data:
+            if flight:
+                session['triptype'] = triptype
+                session['depart_date'] = form.depart_date.data.strftime("%Y-%m-%d")
+                session['return_date'] = form.return_date.data.strftime("%Y-%m-%d")
+                return redirect(url_for('flight.search_flight_result',
+                                        f_place =form.from_place.data , t_place = form.to_place.data))
+                flash ('No flight found ' )
+        flash('Retrun date must after depart date')
     return render_template('flight_main/search_flight.html', form=form)
 
 @flight.route('/searchresult/<f_place>&<t_place>', methods=['GET', 'POST'])
 def search_flight_result(f_place,t_place):
     #flights = Flight.query.all()
-    flight = Flight.query.filter_by(from_place=f_place, to_place=t_place).first_or_404()
-    return render_template('flight_main/search_result.html',flight = flight)
+    depart_date = session.get('depart_date',None)
+    return_date = session.get('return_date', None)
+    triptype = session.get('triptype', None)
+
+    columns = ['Airline', 'From','To','Depart Date', 'Depart Time','Price']
+    if triptype == 'oneway':
+        flights_1 = Flight.query.filter_by(from_place=f_place, to_place=t_place, depart_Date=depart_date,
+                                           available='Upcoming').all()
+        flights_2 = None
+        trip = 'one way trip'
+    else:
+        trip = 'Round  trip'
+        flights_1 = Flight.query.filter_by(from_place=f_place, to_place=t_place, depart_Date = depart_date, available = 'Upcoming').all()
+        flights_2 = Flight.query.filter_by(from_place=t_place, to_place=f_place, depart_Date = return_date, available = 'Upcoming').all()
+    return render_template('flight_main/search_result.html',flights_1= flights_1, flights_2 = flights_2 ,columns=columns, trip = trip , triptype = triptype)
 
 @flight.route('/flightInfo/<flight_ID>/', methods=['GET', 'POST'])
 def flight_list(flight_ID):
@@ -67,21 +86,21 @@ def flight_list(flight_ID):
     flight = Flight.query.filter_by(flightID=flight_ID).first_or_404()
     return render_template('flight_main/flight_list.html', flights=flights, flight=flight)
 
-@flight.route('/bookingDetail/<booking_ID>', methods=['GET', 'POST'])
+@flight.route('/OrderDetail/<order_id>', methods=['GET', 'POST'])
 @login_required
-def booking_detail(booking_ID):
-    bookings = Booking.query.filter_by( user_id = current_user.user_id).all()
-    booking = Booking.query.filter_by().first_or_404()
-    return render_template('booking_main/booking_detail.html', bookings = bookings, booking = booking)
+def order_detail(order_id):
+    orders = Order.query.filter_by(user_id = current_user.user_id).all()
+    order = Order.query.filter_by().first_or_404()
+    return render_template('booking_main/booking_detail.html', orders = orders, order = order)
 
-@flight.route('/bookingconfirm/<flight_ID>', methods=['GET', 'POST'])
+@flight.route('/Orderconfirm/<flight_ID>', methods=['GET', 'POST'])
 @login_required
 def book_confirm(flight_ID):
     flight = Flight.query.filter_by(flightID=flight_ID).first_or_404()
     form = From_book_confirm()
 
     if form.validate_on_submit():
-        book = Booking(
+        book = Order(
             flight_id = flight.flightID,
             user_id = current_user.user_id,
             seat_no = form.seat_no.data,
@@ -90,7 +109,7 @@ def book_confirm(flight_ID):
 
         db.session.add(book)
         db.session.commit()
-        flash('Your booking is confirmed')
+        flash('Your order is confirmed')
         return redirect(url_for('main.userinfo', username=current_user.user_username))
 
     return render_template("flight_main/book_confirm.html" , flight = flight, form = form)

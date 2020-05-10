@@ -40,9 +40,6 @@
                     <li><a href="{{ url_for('user.login') }}">LOGIN</a></li>
                     {% endif %}
 
-                    {% if current_user.roles.id == [ADMIN] %}
-                    <li><a href="{{ url_for('flight.add_booking_user') }}">Book fo other</a></li>
-                    {% endif %}
 
                 </ul>
             </div>

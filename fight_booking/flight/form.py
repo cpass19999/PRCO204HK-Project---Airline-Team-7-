@@ -1,6 +1,7 @@
 from flask_wtf import Form
 from wtforms import StringField, SubmitField, validators, TextAreaField, IntegerField, SelectField, DateTimeField, \
-    DateField
+     RadioField
+from wtforms.fields.html5 import DateField
 from fight_booking.flight.model import Flight, Airport, airline
 from datetime import date
 
@@ -25,8 +26,13 @@ class Form_Testbooking(Form):
 
 class From_search_flight(Form):
 
+    TripType = RadioField('Trip type',choices = [('oneway', 'one way'), ('return', 'return')], default= 'oneway')
+
     from_place = SelectField('From',coerce=str)
     to_place = SelectField('To',coerce=str)
+
+    depart_date = DateField('Depart Date' , default=date.today())
+    return_date = DateField('return Date' , default=date.today())
 
     submit = SubmitField('Search Flight')
 

@@ -23,19 +23,46 @@
 
 </div>
 <div>
-    Booking record:
-    {% if user.bookings %}
-        <div>
+    Order record:
+    {% if user.orders %}
+    <table class="table">
+        <thead>
+            <tr>
+                {% for column in columns %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        {% for order in user.orders %}
+            <tr>
+                <td>{{ order.order_id }}</td>
+                <td>{{ order.func_module_name }}</td>
+                <td>{{ order.func_description }}</td>
+                <td>{{ order.func_is_activate }}</td>
+                <td>{{ order.func_remark }}</td>
+            </tr>
+    </table>
             <ul>
-                {% for booking in user.bookings %}
-                    <li> Booking date {{ booking.create_date }}</li>
+
+                    <li> order date {{ order.create_date }}</li>
                 {% endfor %}
             </ul>
-        </div>
+
+
     {% else %}
         no booking record.
     {% endif %}
 </div>
+
+    {{user.roles[0] }} = {{  user.roles[0] =='ADMIN' }}
+
+    {% if user.roles[0] == 'ADMIN' %}
+    <div>
+        Hello!
+    </div>
+    {%else%}
+        error
+    {% endif %}
 
 
 {% endblock %}

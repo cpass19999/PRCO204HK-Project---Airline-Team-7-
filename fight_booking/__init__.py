@@ -44,4 +44,4 @@ app.register_blueprint(flight, url_prefix='/flight')
 
 db.create_all()
 
-from . import addrole
+from . import DBsetup

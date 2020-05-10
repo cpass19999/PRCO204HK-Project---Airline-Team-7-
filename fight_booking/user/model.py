@@ -45,10 +45,9 @@ class UserReister(UserMixin, db.Model):
     last_login = db.Column(db.DateTime, default=datetime.utcnow())
 
     # flights = db.relationship("Flight", secondary="booking"  , backref=db.backref('users', lazy=True) )
-    bookings = db.relationship("Booking", backref=db.backref('users', lazy=True))
+    bookings = db.relationship("Order", backref=db.backref('users', lazy=True))
 
-    roles = db.relationship('Role', secondary=relations_user_role, lazy='subquery',
-                            backref=db.backref('users', lazy=True))
+    roles = db.relationship('Role', secondary=relations_user_role, lazy='subquery', backref=db.backref('users', lazy=True))
 
     @property
     def password(self):
@@ -125,8 +124,19 @@ class UserReister(UserMixin, db.Model):
             #flash(view_function)
             return False
 
+    #def has_role(self,role_name):
+        #role_list = self.roles
+        #result = role_list.filter(text("name=:role_name")).params(role_name=role_name).first()
+        #if result:
+            #flash(role_name)
+            #return True
+        #else:
+            #flash(role_name)
+            #return False
+
     def __repr__(self):
         return 'user_username:%s, user_email:%s' % (self.user_username, self.user_email)
+
 
     @property
     def user_func(self):
@@ -162,7 +172,9 @@ class Role(db.Model):
         self.name = name
 
     def __repr__(self):
-        return  self.name
+        return self.name
+
+
 
 
 class Func(db.Model):

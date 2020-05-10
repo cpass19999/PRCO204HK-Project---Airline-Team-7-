@@ -49,6 +49,7 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
         func_module_name='fight_booking.main.view.user_role_manager',
         func_description=' ')
 
+
     admin = UserReister(
     user_username = 'admin',
     user_email = 'admin@admin.com',
@@ -57,7 +58,13 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
     user_fullname = 'administator'
      )
     #user = UserReister.query.filter_by(user_username = 'admin').first()
-
+    senior = UserReister(
+    user_username = 'senior',
+    user_email = 'senior@admin.com',
+    user_confirm = 1,
+    password = 'seniorsenior',
+    user_fullname = 'seniorOfFlight'
+     )
 
     admin.roles.append(role_admin)
     role_admin.funcs.append(func_add_book)
@@ -70,12 +77,14 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
     role_admin.funcs.append(func_role_func_manager)
     role_admin.funcs.append(func_user_role_manager)
 
+    role_SENIOR.funcs.append(func_add_book)
 
 
     db.session.add(role_admin)
     db.session.add(role_user)
     db.session.add(role_JUNIOR)
     db.session.add(role_SENIOR)
-    
+
     db.session.add(admin)
+    db.session.add(senior)
     db.session.commit()

@@ -1,3 +1,5 @@
+from fight_booking.flight.form import From_search_flight
+from fight_booking.flight.model import Flight
 from fight_booking.main import main
 from fight_booking import app
 from fight_booking import db
@@ -9,15 +11,21 @@ from fight_booking.user.model import UserReister, Func, Role
 
 
 @main.route('/')
-@main.route('/index')
+@main.route('/index', methods=['GET', 'POST'])
 @app.route('/')
-@login_required
 def index():
     """
     首頁
     :return:
     """
-    return render_template('index.html')
+    form = From_search_flight()
+    if form.validate_on_submit():
+        flights = Flight.query.all()
+        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data).all()
+        if flight:
+            return redirect(url_for('flight.search_flight_result' , f_place =form.from_place.data , t_place = form.to_place.data))
+        flash('No flight found ')
+    return render_template('index.html',form = form)
 
 @main.route('/edituserinfo', methods=['GET', 'POST'])
 @login_required
