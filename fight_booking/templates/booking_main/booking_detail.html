@@ -1,12 +1,16 @@
 {% extends "layout.html" %}
-{% block title %}UserRegister{% endblock title %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 
-<div class="page-header">
-    <h1>Detail</h1>
-</div>
+<h1>Search Result</h1>
 
+<div class="page-header">
+    {% if order.flight_d('r')%}
+    Triptype : Round trip
+    {% else %}
+    Triptype : one way
+    {% endif %}
+</div>
     <div class="col-md-6">
         <h3>Depart flight</h3>
          {% if flight_d %}
@@ -73,6 +77,5 @@
 
     </div>
 {% endif %}
-<h4><b>Amount : {{ flight_d.price+flight_r.price}}</b></h4>
-    {{ wtf.quick_form(form) }}
+
 {% endblock %}

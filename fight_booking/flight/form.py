@@ -1,6 +1,6 @@
 from flask_wtf import Form
 from wtforms import StringField, SubmitField, validators, TextAreaField, IntegerField, SelectField, DateTimeField, \
-     RadioField
+    RadioField, BooleanField
 from wtforms.fields.html5 import DateField
 from fight_booking.flight.model import Flight, Airport, airline
 from datetime import date
@@ -53,8 +53,9 @@ class From_search_flight(Form):
 class From_book_confirm(Form):
     seat_no = IntegerField('seatNo', validators=[
         validators.NumberRange(1, 250)])
+    confirmPay = BooleanField('Pay now')
     submit = SubmitField('confirm')
 
 
 class From_book_flight(Form):
-    submit = SubmitField('confirm')
+    submit = SubmitField('Order')

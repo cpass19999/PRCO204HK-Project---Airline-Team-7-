@@ -7,62 +7,64 @@
     <h1>UserINFO</h1>
 </div>
 
- <div>
-     {% if user.address %}
-        <p>{{user.user_fullname}} live in {{ user.address }}</p>
-     {% endif %}
-
-     {% if user.contactNo %}
-        <p>contact Number :{{ user.contactNo }}</p>
-     {% endif %}
-
       <div class="post-editor">
-            <a href="{{ url_for('main.edituserinfo') }}">Edit</a>
+            <a href="{{ url_for('main.edituserinfo') }}">Update personal data</a>
       </div>
 
+    <div name="userinfo-div">
+        {% if user %}
+    <table class="table">
+        <tr>
+            <td>{{ Usercolumns[0] }}</td>
+            <td>{{user.user_fullname}}</td>
+        </tr>
+        <tr>
+            <td>{{ Usercolumns[1] }}</td>
+            <td>{{user.user_email}}</td>
+        </tr>
+        <tr>
+            <td>{{ Usercolumns[2] }}</td>
+            <td>{{user.contactNo}}</td>
+        </tr>
+    </table>
+        {% endif %}
+    </div>
 
-</div>
-<div>
+<br><br>
+<div name="user_order-div">
     Order record:
     {% if user.orders %}
     <table class="table">
         <thead>
             <tr>
-                {% for column in columns %}
+                {% for column in ordercolums %}
                 <th>{{ column }}</th>
                 {% endfor %}
             </tr>
         </thead>
         {% for order in user.orders %}
             <tr>
-                <td>{{ order.order_id }}</td>
-                <td>{{ order.func_module_name }}</td>
-                <td>{{ order.func_description }}</td>
-                <td>{{ order.func_is_activate }}</td>
-                <td>{{ order.func_remark }}</td>
+                <td>{{ order.Order_id }}</td>
+                <td>{{order.flight_d('d').from_place}}</td>
+                <td>{{order.flight_d('r').from_place}}</td>
+                {% if order.paid %}
+
+                <td>paid</td>
+                <td>{{order.price}}</td>
+                <td></td>
+
+                    {%else%}
+
+                <td>not pay</td>
+                <td>{{order.price}}</td>
+                <td><button type="button" onclick="window.location.href='{{ url_for( 'flight.order_detail' , order_id = order.Order_id ) }}';"> Pay Now </button> </td>
+                    {% endif %}
             </tr>
+        {% endfor %}
     </table>
-            <ul>
-
-                    <li> order date {{ order.create_date }}</li>
-                {% endfor %}
-            </ul>
-
-
     {% else %}
         no booking record.
     {% endif %}
 </div>
-
-    {{user.roles[0] }} = {{  user.roles[0] =='ADMIN' }}
-
-    {% if user.roles[0] == 'ADMIN' %}
-    <div>
-        Hello!
-    </div>
-    {%else%}
-        error
-    {% endif %}
-
 
 {% endblock %}

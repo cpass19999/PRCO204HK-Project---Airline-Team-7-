@@ -45,7 +45,7 @@ class UserReister(UserMixin, db.Model):
     last_login = db.Column(db.DateTime, default=datetime.utcnow())
 
     # flights = db.relationship("Flight", secondary="booking"  , backref=db.backref('users', lazy=True) )
-    bookings = db.relationship("Order", backref=db.backref('users', lazy=True))
+    orders = db.relationship("Order", backref=db.backref('users', lazy=True))
 
     roles = db.relationship('Role', secondary=relations_user_role, lazy='subquery', backref=db.backref('users', lazy=True))
 

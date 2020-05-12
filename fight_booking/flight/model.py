@@ -2,7 +2,6 @@ from sqlalchemy import PrimaryKeyConstraint, ForeignKeyConstraint
 from fight_booking import db
 from datetime import datetime
 
-
 class Flight(db.Model):
     __tablename__ = 'tbl_flight'
     __table_args__ = (
@@ -10,7 +9,6 @@ class Flight(db.Model):
         ForeignKeyConstraint(['airlineName'], ['airline.airlineName'], name='FK_airlineName'),
     )
     flightID = db.Column(db.Integer, autoincrement=True, primark_key=True)
-    # flightID = db.Column(db.String(30), unique=True, nullable=False)
     airlineName = db.Column(db.String(30), db.ForeignKey('airline.airlineName'), nullable=False,)
     flightNo = db.Column(db.String(30), nullable=False)
     airplacneModel = db.Column(db.String(30), nullable=False)
@@ -18,19 +16,13 @@ class Flight(db.Model):
     to_place = db.Column(db.String(30), nullable=False)
     depart_Date = db.Column(db.Date, nullable=False)
     depart_Time = db.Column(db.Time, nullable=False)
-    #arrival_at_to = db.Column(db.DateTime)
     available = db.Column(db.String(30), nullable=False)
     price = db.Column(db.Integer, nullable = False)
-
 
     airline = db.relationship("airline", backref=db.backref('airline', lazy=True))
     #airport = db.relationship("Airport", backref=db.backref('Airport', lazy=True))
     #airplacnes = db.relationship("airplacnes", backref=db.backref('airplacnes', lazy=True))
     # bookings = db.relationship("UserReister", secondary="booking" , backref=db.backref('flights', lazy='dynamic') )
-
-    def __str__(self):
-        return str(self.flightID) + str(self.from_place) + str(self.to_place) + str(self.depart_at_from) + str(
-            self.arrival_at_to)
 
     @property
     def flightNo(self):
@@ -92,29 +84,46 @@ class airplacnes(db.Model):
 
 
 class Order(db.Model):
-    __tablename__ = 'Order'
+    __tablename__ = 'Orders'
     __table_args__ = (
         PrimaryKeyConstraint('Order_id'),
         ForeignKeyConstraint(['user_id'], ['tbl_user.user_id'], name='FK_userid'),
-        ForeignKeyConstraint(['flight_id'], ['tbl_flight.flightID'], name='FK_flightID'),
+        #ForeignKeyConstraint(['depart_flightid'], ['tbl_flight.flightID'], name='FK_flight_d_ID'),
+        #ForeignKeyConstraint(['return_flightid'], ['tbl_flight.flightID'], name='FK_flight_r_ID'),
     )
 
     Order_id = db.Column(db.Integer, autoincrement=True, primark_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('tbl_user.user_id'))
     # user = db.relationship("UserReister", backref=db.backref('bookings', lazy=True))
-    flight_id = db.Column(db.Integer, db.ForeignKey('tbl_flight.flightID'))
+    #flight_id = db.Column(db.Integer, db.ForeignKey('tbl_flight.flightID'))
     # flight = db.relationship("UserReister", backref=db.backref('bookings', lazy=True))
     seat_no = db.Column(db.Integer, nullable=False)
     create_date = db.Column(db.DateTime, default=datetime.utcnow)
     edit_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     price = db.Column(db.Integer)
-    paid = db.Column(db.Boolean, default = False)
+    paid = db.Column(db.Boolean, default = True)
     canceled = db.Column(db.Boolean, default=False)
-    flights = db.relationship("Flight", backref=db.backref('flights', lazy=True))
+    depart_flightid = db.Column(db.Integer, nullable=False)
+    return_flightid = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, user_id, flight_id, seat_no, price):
+
+
+    #flights = db.relationship("Flight",secondary=relations_order_flight, lazy='subquery',backref=db.backref('flights', lazy=True))
+    Orderuser = db.relationship("UserReister", backref=db.backref('users_order', lazy=True))
+    #flight_d = db.relationship("Flight",lazy='subquery',backref=db.backref('flights', lazy=True))
+    def flight_d(self,place):
+        if place == 'd':
+            flight_d = Flight.query.filter_by(flightID = self.depart_flightid).first()
+            return flight_d;
+        if place == 'r':
+            flight_d = Flight.query.filter_by(flightID =self.return_flightid).first()
+            return  flight_d;
+
+
+    def __init__(self, user_id, seat_no, price,depart_flightid,return_flightid):
         self.user_id = user_id
-        self.flight_id = flight_id
+        self.return_flightid = return_flightid
+        self.depart_flightid = depart_flightid
         self.seat_no = seat_no
         self.price = price
 

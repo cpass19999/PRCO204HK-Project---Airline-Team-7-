@@ -66,6 +66,14 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
     user_fullname = 'seniorOfFlight'
      )
 
+    s1001 = UserReister(
+    user_username = 's1001',
+    user_email = 's1001@email.com',
+    user_confirm = 1,
+    password = '12345678',
+    user_fullname = 's1001_01'
+     )
+
     admin.roles.append(role_admin)
     role_admin.funcs.append(func_add_book)
     role_admin.funcs.append(func_viewfunction_c)
@@ -87,4 +95,5 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
 
     db.session.add(admin)
     db.session.add(senior)
+    db.session.add(s1001)
     db.session.commit()

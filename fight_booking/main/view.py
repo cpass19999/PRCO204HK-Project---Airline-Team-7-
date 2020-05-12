@@ -1,9 +1,9 @@
 from fight_booking.flight.form import From_search_flight
 from fight_booking.flight.model import Flight
 from fight_booking.main import main
-from fight_booking import app
+from fight_booking import app, flight
 from fight_booking import db
-from flask import render_template, flash, redirect, url_for, request, abort
+from flask import render_template, flash, redirect, url_for, request, abort, session
 from flask_login import login_required, current_user
 from fight_booking.main.form import FormUserInfo, FormRole_Func_manager, Form_User_Role_manager
 from fight_booking.user.form import FormFunc, FormRole
@@ -20,11 +20,18 @@ def index():
     """
     form = From_search_flight()
     if form.validate_on_submit():
-        flights = Flight.query.all()
-        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data).all()
-        if flight:
-            return redirect(url_for('flight.search_flight_result' , f_place =form.from_place.data , t_place = form.to_place.data))
-        flash('No flight found ')
+        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data,available = 'Upcoming').all()
+        triptype = form.TripType.data
+
+        if form.return_date.data > form.depart_date.data:
+            if flight:
+                session['triptype'] = triptype
+                session['depart_date'] = form.depart_date.data.strftime("%Y-%m-%d")
+                session['return_date'] = form.return_date.data.strftime("%Y-%m-%d")
+                return redirect(url_for('flight.search_flight_result',
+                                        f_place =form.from_place.data , t_place = form.to_place.data))
+                flash ('No flight found ' )
+        flash('Retrun date must after depart date')
     return render_template('index.html',form = form)
 
 @main.route('/edituserinfo', methods=['GET', 'POST'])
@@ -51,10 +58,13 @@ def edituserinfo():
 @main.route('/userinfo/<username>')
 @login_required
 def userinfo(username):
+    Usercolumns = ['Full name', 'Email', 'contactNo']
+    ordercolums = ['order id','from','To', 'Paid','price']
     user = UserReister.query.filter_by(user_username= username).first()
     if user is None:
         abort(404)
-    return render_template('main/UserInfo.html', user=user)
+    return render_template('main/UserInfo.html', user=user,Usercolumns=Usercolumns,ordercolums = ordercolums)
+
 
 @main.route('/viewfunction/c/', methods=['GET', 'POST'])
 def view_function_c():

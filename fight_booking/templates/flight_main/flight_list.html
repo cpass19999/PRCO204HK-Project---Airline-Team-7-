@@ -3,16 +3,42 @@
 {% block content %}
 
 <div class="page-header">
-    Hello, {{ current_user.user_username }}
- {% for flight in flights %}
-    <div class="flight-content">
-        <div class="flight-title">{{ flight.airlineName }}</div>
-        <div class="flight-from_place">{{ flight.from_place }}</div>
-        <div class="flight-to_place">{{ flight.to_place }}</div>
-        <div class="flight-depart">{{ flight.depart_at_from }}</div>
-        <div class="flight-available">{{ flight.available }}</div>
+
+    <div class="col-md-4">
+         {% if flight_d %}
+    <table class="table">
+        <tr>
+            <td>{{ columns[0] }}</td>
+            <td>{{flight_d.airline}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[1] }}</td>
+            <td>{{flight_d.from_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[2] }}</td>
+            <td>{{flight_d.to_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[3] }}</td>
+            <td>{{ flight_d.depart_Date }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[4] }}</td>
+            <td>{{ flight_d.depart_Time }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[5] }}</td>
+            <td>{{ flight_d.price }}</td>
+        </tr>
+    </table>
+    {% endif %}
     </div>
-    {% endfor %}
+    <div class="col-md-4">
+
+    </div>
+
+
 
 </div>
 
