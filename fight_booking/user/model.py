@@ -34,7 +34,7 @@ class UserReister(UserMixin, db.Model):
     password_hash = db.Column(db.String(150), nullable=False)
     user_fullname = db.Column(db.String(50))
     passportID = db.Column(db.String(20))
-    passport_expiration = db.Column(db.String(20))
+    passport_expiration = db.Column(db.DateTime)
     passport_country = db.Column(db.String(20))
     contactNo = db.Column(db.Integer)
     # about_me = db.Column(db.Text())
@@ -124,18 +124,23 @@ class UserReister(UserMixin, db.Model):
             #flash(view_function)
             return False
 
-    #def has_role(self,role_name):
-        #role_list = self.roles
-        #result = role_list.filter(text("name=:role_name")).params(role_name=role_name).first()
-        #if result:
-            #flash(role_name)
-            #return True
-        #else:
-            #flash(role_name)
-            #return False
+    def has_role(self,role_name):
+        role_list = self.user_role
+        result = role_list.filter(text("name=:role_name")).params(role_name=role_name).first()
+        if result:
+            return True
+        else:
+            return False
 
     def __repr__(self):
         return 'user_username:%s, user_email:%s' % (self.user_username, self.user_email)
+
+    @property
+    def user_role(self):
+        role_list = Role.query.join(relations_user_role)\
+                .join(UserReister)\
+                .filter(UserReister.user_id == self.user_id)
+        return role_list
 
 
     @property

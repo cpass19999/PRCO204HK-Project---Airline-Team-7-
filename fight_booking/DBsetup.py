@@ -1,4 +1,5 @@
 from fight_booking import db
+from fight_booking.flight.model import Flight, airline
 from fight_booking.user import Role
 from fight_booking.user.model import UserReister, Func
 
@@ -50,6 +51,17 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
         func_description=' ')
 
 
+    func_user_role_manager_users = Func(
+        func_module_name='fight_booking.main.view.manager_user',
+        func_description=' ')
+
+    func_user_role_manager_odrers = Func(
+        func_module_name='fight_booking.main.view.manager_order',
+        func_description=' ')
+
+
+
+
     admin = UserReister(
     user_username = 'admin',
     user_email = 'admin@admin.com',
@@ -75,6 +87,14 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
      )
 
     admin.roles.append(role_admin)
+    admin.roles.append(role_SENIOR)
+    admin.roles.append(role_JUNIOR)
+    admin.roles.append(role_user)
+
+    senior.roles.append(role_SENIOR)
+    senior.roles.append(role_JUNIOR)
+    admin.roles.append(role_user)
+
     role_admin.funcs.append(func_add_book)
     role_admin.funcs.append(func_viewfunction_c)
     role_admin.funcs.append(func_view_function_r)
@@ -84,14 +104,47 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
     role_admin.funcs.append(func_role_manager_e)
     role_admin.funcs.append(func_role_func_manager)
     role_admin.funcs.append(func_user_role_manager)
+    role_admin.funcs.append(func_user_role_manager_users)
+    role_admin.funcs.append(func_user_role_manager_odrers)
 
     role_SENIOR.funcs.append(func_add_book)
+
+    Emirates = airline(
+        name = "Emirates",
+        airline_short = "EA"
+    )
+
+
+    flight1 = Flight(
+        airlineName ="Emirates",
+        airplacneModel =777,
+        from_place ="JFK",
+        to_place ="O'Hare",
+        depart_Date ="2020-06-19",
+        depart_Time ="22:30:00",
+        available = "Upcoming",
+        price = 999
+        )
+
+    flight2 = Flight(
+                 airlineName="Emirates",
+                 airplacneModel=777,
+                 from_place="O'Hare",
+                 to_place="O'Hare",
+                 depart_Date="2020-05-15",
+                 depart_Time="10:30:00",
+                 available="Upcoming",
+                 price=899
+             )
 
 
     db.session.add(role_admin)
     db.session.add(role_user)
     db.session.add(role_JUNIOR)
     db.session.add(role_SENIOR)
+
+    db.session.add()
+
 
     db.session.add(admin)
     db.session.add(senior)

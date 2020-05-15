@@ -1,11 +1,11 @@
 from fight_booking.flight.form import From_search_flight
-from fight_booking.flight.model import Flight
+from fight_booking.flight.model import Flight, Order
 from fight_booking.main import main
-from fight_booking import app, flight
+from fight_booking import app, flight, decorator_permission
 from fight_booking import db
 from flask import render_template, flash, redirect, url_for, request, abort, session
 from flask_login import login_required, current_user
-from fight_booking.main.form import FormUserInfo, FormRole_Func_manager, Form_User_Role_manager
+from fight_booking.main.form import FormUserInfo, FormRole_Func_manager, Form_User_Role_manager, FormUserEdit
 from fight_booking.user.form import FormFunc, FormRole
 from fight_booking.user.model import UserReister, Func, Role
 
@@ -20,18 +20,28 @@ def index():
     """
     form = From_search_flight()
     if form.validate_on_submit():
-        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data,available = 'Upcoming').all()
+        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data,available = 'Upcoming', depart_Date = form.depart_date.data.strftime("%Y-%m-%d"), ).all()
         triptype = form.TripType.data
 
-        if form.return_date.data > form.depart_date.data:
+        if triptype == 'oneway':
             if flight:
                 session['triptype'] = triptype
                 session['depart_date'] = form.depart_date.data.strftime("%Y-%m-%d")
-                session['return_date'] = form.return_date.data.strftime("%Y-%m-%d")
                 return redirect(url_for('flight.search_flight_result',
-                                        f_place =form.from_place.data , t_place = form.to_place.data))
-                flash ('No flight found ' )
-        flash('Retrun date must after depart date')
+                                        f_place=form.from_place.data, t_place=form.to_place.data))
+            flash('No flight found ')
+
+        if triptype == 'return':
+            if form.return_date.data > form.depart_date.data :
+                if flight:
+                    session['triptype'] = triptype
+                    session['depart_date'] = form.depart_date.data.strftime("%Y-%m-%d")
+                    session['return_date'] = form.return_date.data.strftime("%Y-%m-%d")
+                    return redirect(url_for('flight.search_flight_result',
+                                            f_place =form.from_place.data , t_place = form.to_place.data))
+                    flash ('No flight found ' )
+                flash('Retrun date must after depart date')
+
     return render_template('index.html',form = form)
 
 @main.route('/edituserinfo', methods=['GET', 'POST'])
@@ -55,13 +65,42 @@ def edituserinfo():
     form.gender.data = current_user.gender
     return render_template('main/editUserInfo.html', form=form)
 
+@main.route('/edituser/<username>', methods=['GET', 'POST'])
+@login_required
+def edituser(username):
+    if not current_user.has_role('ADMIN'):
+        abort(404)
+
+    user = UserReister.query.filter_by(user_username = username).first()
+    form = FormUserEdit()
+    if form.validate_on_submit():
+        user.user_fullname = form.user_fullname.data
+        user.address = form.address.data
+        user.gender = form.gender.data
+        user.passportID = form.passportID.data
+        user.contactNo = form.contactNo.data
+        db.session.add(user)
+        db.session.commit()
+        #  在編輯個人資料完成之後，將使用者引導到使用者資訊觀看結果
+        flash('You Have Already Edit Your Info')
+        return redirect(url_for('main.edituser', username=user.user_username))
+    form.user_username.data = user.user_username
+    form.user_email.data = user.user_email
+    form.user_fullname.data = user.user_fullname
+    form.address.data = user.address
+    form.contactNo.data = user.contactNo
+    form.gender.data = user.gender
+    form.user_confirm.data = user.user_confirm
+    return render_template('main/editUser.html', form=form)
+
+
 @main.route('/userinfo/<username>')
 @login_required
 def userinfo(username):
     Usercolumns = ['Full name', 'Email', 'contactNo']
     ordercolums = ['order id','from','To', 'Paid','price']
     user = UserReister.query.filter_by(user_username= username).first()
-    if user is None:
+    if user is None or not current_user.user_username == username:
         abort(404)
     return render_template('main/UserInfo.html', user=user,Usercolumns=Usercolumns,ordercolums = ordercolums)
 
@@ -161,6 +200,7 @@ def role_manager_e(role_id):
         return redirect(url_for('main.role_manager_r', page=1))
     return render_template('main/managerRole.html', form=form, action='edit')
 
+
 @main.route('/role_func_manager/<int:role_id>/', methods=['GET', 'POST'])
 def role_func_manager(role_id):
     """
@@ -225,3 +265,22 @@ def user_role_manager(user_id):
     #  務必執行，預設值才會成功
     form.process()
     return render_template('main/User_Role_manager.html', form=form)
+
+@main.route('/manage_menu', methods=['GET', 'POST'])
+def manager_menu():
+
+    return render_template('main/manager_menu.html')
+
+@main.route('/manager_order', methods=['GET', 'POST'])
+def manager_order():
+    ordercolums = ['order id', 'Order user','from', 'To', 'Paid', 'price']
+    users = UserReister.query.all()
+    orders = Order.query.all()
+    return render_template('main/manager_order.html',orders = orders,users = users, ordercolums=ordercolums)
+
+@main.route('/manager_user', methods=['GET', 'POST'])
+def manager_user():
+    Usercolumns = ['user id','user name','Full name', 'Email', 'contactNo','gender','address','regist date','available']
+    users = UserReister.query.all()
+    orders = Order.query.all()
+    return render_template('main/manager_user.html',orders = orders,users = users, Usercolumns=Usercolumns)

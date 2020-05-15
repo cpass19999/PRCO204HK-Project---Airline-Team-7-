@@ -41,6 +41,7 @@
     {% endif %}
     </div>
 
+
 {% if flight_r %}
 <div class="col-md-6">
     <h3>Return flight</h3>
@@ -70,9 +71,19 @@
             <td>{{ flight_r.price }}</td>
         </tr>
     </table>
-
     </div>
 {% endif %}
+
+<br>
+
+
+<div class="col-md-6">
+{% if flight_r%}
 <h4><b>Amount : {{ flight_d.price+flight_r.price}}</b></h4>
+{%else%}
+<h4><b>Amount : {{ flight_d.price}}</b></h4>
+{% endif %}
+
     {{ wtf.quick_form(form) }}
+</div>
 {% endblock %}

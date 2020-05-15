@@ -10,7 +10,12 @@ class Form_Testbooking(Form):
     """
     建置blog表頭的表單
     """
-    flight_id = StringField('flight_id', validators=[
+    flight_id_d = StringField('Depart flight_id', validators=[
+        validators.DataRequired(),
+        validators.Length(1, 30)
+    ])
+
+    flight_id_r = StringField('Return flight_id', validators=[
         validators.DataRequired(),
         validators.Length(1, 30)
     ])

@@ -37,6 +37,15 @@
                     <li><a href="{{ url_for('main.userinfo', username = current_user.user_username) }}">USERINFO</a></li>
                     <!-- 透過url_for設定LOGOUT連結綁定LOGOUT -->
                     <li><a href="{{ url_for('user.logout') }}">LOGOUT</a></li>
+
+                    {% if current_user.has_role('ADMIN') %}
+                    <li><a href="{{url_for('main.manager_menu')}}">Manager</a></li>
+                    {%endif%}
+
+                    {% if current_user.has_role('JUNIOR') %}
+                    <li><a href="{{url_for('flight.add_booking_user')}}">Book for user</a></li>
+                    {%endif%}
+
                     {% else %}
                     <li><a href="{{ url_for('user.register') }}">Register</a></li>
                     <!-- 透過url_for設定LOGIN連結綁定LOGIN -->

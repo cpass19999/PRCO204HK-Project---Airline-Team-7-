@@ -32,16 +32,6 @@ class Flight(db.Model):
     def flightNo(self):
         self.flightNo = airline.airline_short + self.flightID
 
-
-    def __init__(self,airlineName,airplacneModel,from_place,to_place,depart_at_from,arrival_at_to,available):
-        self.airlineName = airlineName
-        self.airplacneModel = airplacneModel
-        self.from_place = from_place
-        self.to_place = to_place
-        self.depart_at_from = depart_at_from
-        self.arrival_at_to = arrival_at_to
-        self.available = available
-
 class airline(db.Model):
     __table_args__ = (
         PrimaryKeyConstraint('airlineID'),
@@ -50,8 +40,9 @@ class airline(db.Model):
     airlineName = db.Column(db.String(30), unique=True, nullable=False)
     airline_short = db.Column(db.String(5), unique=True, nullable=False)
 
-    def __init__(self, name):
+    def __init__(self, name , airline_short):
         self.airlineName = name
+        self.airline_short = airline_short
 
     def get_short(self):
         return self.airline_short
@@ -101,10 +92,10 @@ class Order(db.Model):
     create_date = db.Column(db.DateTime, default=datetime.utcnow)
     edit_date = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     price = db.Column(db.Integer)
-    paid = db.Column(db.Boolean, default = True)
+    paid = db.Column(db.Boolean, default = False)
     canceled = db.Column(db.Boolean, default=False)
     depart_flightid = db.Column(db.Integer, nullable=False)
-    return_flightid = db.Column(db.Integer, nullable=False)
+    return_flightid = db.Column(db.Integer)
 
 
 

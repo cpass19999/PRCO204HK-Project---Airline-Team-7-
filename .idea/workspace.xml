@@ -31,13 +31,13 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\a\fight_booking\main" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\a\fight_booking\templates\booking" />
       <recent name="D:\Work\a\fight_booking\user" />
       <recent name="D:\Work\a\fight_booking\airline" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Work\a\fight_booking\main" />
     </key>
   </component>
   <component name="RunManager" selected="Python.FeiFlight">
@@ -104,12 +104,12 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589094621712">
+    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589537152403">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589094621712" />
     <state x="3080" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588614917099" />
-    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1588683028227" />
+    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1589537152403" />
     <state x="1170" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586337398930">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -143,11 +143,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1053" y="100" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1587030606516" />
-    <state x="624" y="200" width="995" height="1027" key="dock-window-1" timestamp="1589125968841">
+    <state x="554" y="119" width="1678" height="1008" key="dock-window-1" timestamp="1589536147948">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="624" y="200" width="995" height="1027" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589125968841" />
-    <state x="891" y="0" width="574" height="1019" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1588768371496" />
+    <state x="1087" y="28" width="840" height="1019" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589453601841" />
+    <state x="554" y="119" width="1678" height="1008" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1589536147948" />
     <state x="590" y="-16" width="995" height="1027" maximized="true" key="dock-window-2" timestamp="1589125446800">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,40 +1,12 @@
 {% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-
 {% block content %}
-
-<div >
-    <h1>UserINFO</h1>
+<div class="page-header">
+    <h1>Hello, {{ current_user.user_username }}</h1>
 </div>
 
-      <div class="post-editor">
-            <a href="{{ url_for('main.edituserinfo') }}">Update personal data</a>
-      </div>
-
-    <div name="userinfo-div">
-        {% if user %}
-    <table class="table">
-        <tr>
-            <td>{{ Usercolumns[0] }}</td>
-            <td>{{user.user_fullname}}</td>
-        </tr>
-        <tr>
-            <td>{{ Usercolumns[1] }}</td>
-            <td>{{user.user_email}}</td>
-        </tr>
-        <tr>
-            <td>{{ Usercolumns[2] }}</td>
-            <td>{{user.contactNo}}</td>
-        </tr>
-    </table>
-        {% endif %}
-    </div>
-
-<br><br>
-<div name="user_order-div">
-    Order record:
-    {% if user.orders %}
-    <table class="table">
+<div class="container">
+<table class="table">
         <thead>
             <tr>
                 {% for column in ordercolums %}
@@ -42,11 +14,17 @@
                 {% endfor %}
             </tr>
         </thead>
-        {% for order in user.orders %}
+        {% for order in orders %}
             <tr>
                 <td>{{ order.Order_id }}</td>
+                <td>{{ order.Orderuser.user_username }}</td>
                 <td>{{order.flight_d('d').from_place}}</td>
+                {% if order.return_flightid %}
                 <td>{{order.flight_d('r').from_place}}</td>
+                {%else%}
+                <td>{{order.flight_d('d').to_place}}</td>
+                {% endif %}
+
                 {% if order.paid %}
 
                 <td>paid</td>
@@ -62,10 +40,6 @@
             </tr>
         {% endfor %}
     </table>
-    {% else %}
-        no booking record.
-    {% endif %}
 </div>
-
 
 {% endblock %}

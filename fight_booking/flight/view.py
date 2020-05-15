@@ -21,11 +21,27 @@ def add_booking_user():
 
     form = Form_Testbooking()
     if form.validate_on_submit():
-        book = Order(
-            flight_id=form.flight_id.data,
-            user_id=current_user.user_id,
-            seat_no = form.seat_no.data
-        )
+        flight_d = Flight.query.filter_by(flightID=form.flight_id_r.data).first_or_404()
+
+        if form.flight_id_r.data:
+            flight_r = Flight.query.filter_by(flightID=form.flight_id_r.data).first_or_404()
+            book = Order(
+                depart_flightid=form.flight_id_r.data,
+                return_flightid=form.flight_id_r.data,
+                user_id=form.user_id.data,
+                price=flight_r.price + flight_d.price,
+                seat_no=form.seat_no.data
+            )
+        else:
+            flight_r = None
+            book = Order(
+                depart_flightid=form.flight_id_r.data,
+                user_id=form.user_id.data,
+                price=flight_r.price + flight_d.price,
+                seat_no=form.seat_no.data
+            )
+
+
         db.session.add(book)
         db.session.commit()
         flash('Create New Blog Success')
@@ -43,18 +59,27 @@ def search_flight():
     form = From_search_flight()
 
     if form.validate_on_submit():
-        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data,available = 'Upcoming').all()
+        flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data,available = 'Upcoming', depart_Date = form.depart_date.data.strftime("%Y-%m-%d"), ).all()
         triptype = form.TripType.data
 
-        if form.return_date.data > form.depart_date.data:
+        if triptype == 'oneway':
             if flight:
                 session['triptype'] = triptype
                 session['depart_date'] = form.depart_date.data.strftime("%Y-%m-%d")
-                session['return_date'] = form.return_date.data.strftime("%Y-%m-%d")
                 return redirect(url_for('flight.search_flight_result',
-                                        f_place =form.from_place.data , t_place = form.to_place.data))
-                flash ('No flight found ' )
-        flash('Retrun date must after depart date')
+                                        f_place=form.from_place.data, t_place=form.to_place.data))
+            flash('No flight found ')
+
+        if triptype == 'return':
+            if form.return_date.data > form.depart_date.data :
+                if flight:
+                    session['triptype'] = triptype
+                    session['depart_date'] = form.depart_date.data.strftime("%Y-%m-%d")
+                    session['return_date'] = form.return_date.data.strftime("%Y-%m-%d")
+                    return redirect(url_for('flight.search_flight_result',
+                                            f_place =form.from_place.data , t_place = form.to_place.data))
+                    flash ('No flight found ' )
+                flash('Retrun date must after depart date')
 
     return render_template('flight_main/search_flight.html', form=form)
 
@@ -74,6 +99,7 @@ def search_flight_result(f_place,t_place):
                                            available='Upcoming').all()
         flights_2 = None
         trip = 'one way trip'
+
     else:
         trip = 'Round  trip'
         flights_1 = Flight.query.filter_by(from_place=f_place, to_place=t_place, depart_Date = depart_date, available = 'Upcoming').all()
@@ -131,34 +157,34 @@ def book_confirm():
     if triptype == 'oneway':
         flight_d = Flight.query.filter_by(flightID=depart_id).first_or_404()
         flight_r = None
+        book = Order(
+            user_id=current_user.user_id,
+            seat_no=form.seat_no.data,
+            price=flight_d.price,
+            depart_flightid=flight_d.flightID,
+            return_flightid= None
+        )
     else:
         flight_d = Flight.query.filter_by(flightID=depart_id).first_or_404()
         flight_r = Flight.query.filter_by(flightID=return_id).first_or_404()
+        book = Order(
+            user_id=current_user.user_id,
+            seat_no=form.seat_no.data,
+            price=flight_d.price + flight_r.price,
+            depart_flightid=flight_d.flightID,
+            return_flightid=flight_r.flightID
+        )
 
 
     if form.validate_on_submit():
         if form.confirmPay:
-            book = Order(
-                user_id=current_user.user_id,
-                seat_no=form.seat_no.data,
-                price=flight_d.price + flight_r.price,
-                depart_flightid=flight_d.flightID,
-                return_flightid=flight_r.flightID
-            )
-            db.session.add(book)
-            db.session.commit()
-            return redirect(url_for('main.userinfo', username=current_user.user_username))
+            book.paid = True
+            flash('Your order is confirmed and paid')
         else:
-            book = Order(
-                user_id= current_user.user_id,
-                seat_no = form.seat_no.data,
-                price = flight_d.price + flight_r.price,
-                depart_flightid = flight_d.flightID,
-                return_flightid = flight_r.flightID
-            )
-            db.session.add(book)
-            db.session.commit()
             flash('Your order is confirmed')
+
+        db.session.add(book)
+        db.session.commit()
         return redirect(url_for('main.userinfo', username=current_user.user_username))
 
     return render_template("flight_main/book_confirm.html" , flight_d = flight_d, flight_r = flight_r,form = form,columns=columns)
