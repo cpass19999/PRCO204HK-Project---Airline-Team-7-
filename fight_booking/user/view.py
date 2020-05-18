@@ -17,6 +17,8 @@ def index():
 def register():
     form = FormRegister()
     if form.validate_on_submit():
+        pw = form.password.data
+
         user = UserReister(
             user_username=form.username.data,
             user_email=form.email.data,
@@ -76,7 +78,7 @@ def login():
                 if not next_is_valid(next):
                     #  如果使用者沒有該url權限，那就reject掉。
                     return 'Bad Boy!!'
-                return redirect(next or url_for('index'))
+                return redirect(next or 'https://' +url_for('index'))
                 # return 'Welcome' + current_user.username
             else:
                 #  如果密碼驗證錯誤，就顯示錯誤訊息。
