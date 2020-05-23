@@ -1,7 +1,7 @@
 from flask_wtf import Form
 from wtforms import StringField, SubmitField, validators, SelectField, TextAreaField, SelectMultipleField, widgets, \
     BooleanField
-from wtforms.fields.html5 import EmailField, DateField
+from wtforms.fields.html5 import EmailField, DateField, IntegerField
 
 
 class FormUserInfo(Form):
@@ -99,3 +99,15 @@ class Form_User_Role_manager(Form):
     """
     all_role_option = MultiCheckboxField('all_role', coerce=int)
     submit = SubmitField('submit')
+
+class Form_cacredit_card(Form):
+    cardNo = StringField('credit card number', validators=[
+            validators.DataRequired()
+        ])
+
+    credit_expiration = DateField('credit card expiration Date')
+
+    security_code = IntegerField('security code', validators=[
+            validators.DataRequired()
+        ])
+    submit = SubmitField('pay')

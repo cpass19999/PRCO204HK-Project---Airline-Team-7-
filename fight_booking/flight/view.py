@@ -140,7 +140,8 @@ def order_detail(order_id):
             order.paid = True
             db.session.commit()
             flash('Your order is Paid')
-            return redirect(url_for('main.userinfo', username=current_user.user_username))
+            return redirect(url_for('main.payment'))
+            #return redirect(url_for('main.userinfo', username=current_user.user_username))
 
     return render_template("flight_main/book_confirm.html", flight_d=flights_1, flight_r=flights_2, form=form,columns=columns)
 

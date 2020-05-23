@@ -37,6 +37,7 @@
                 <td>{{order.price}}</td>
                 <td><button type="button" onclick="window.location.href='{{ url_for( 'flight.order_detail' , order_id = order.Order_id ) }}';"> Pay Now </button> </td>
                     {% endif %}
+                <td><button>edit</button></td>
             </tr>
         {% endfor %}
     </table>

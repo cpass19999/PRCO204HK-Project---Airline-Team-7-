@@ -6,8 +6,10 @@
 </div>
     <h1>Hello, {{ current_user.user_username }}</h1>
 <div>
-    <button type="button" onclick="window.location.href='{{ url_for( 'main.manager_order' ) }}';"> Order</button>
+    order manage
+    <br><button type="button" onclick="window.location.href='{{ url_for( 'main.manager_order' ) }}';"> Order</button>
     <br>
-    <button type="button" onclick="window.location.href='{{ url_for( 'main.manager_user' ) }}';"> User</button>
+    user manage
+    <br><button type="button" onclick="window.location.href='{{ url_for( 'main.manager_user' ) }}';"> User</button>
 </div>
 {% endblock %}

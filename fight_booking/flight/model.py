@@ -96,6 +96,7 @@ class Order(db.Model):
     canceled = db.Column(db.Boolean, default=False)
     depart_flightid = db.Column(db.Integer, nullable=False)
     return_flightid = db.Column(db.Integer)
+    payment = db.Column(db.Integer)
 
 
 
@@ -119,3 +120,18 @@ class Order(db.Model):
         self.price = price
 
 # db.create_all()
+
+class payment(db.Model):
+    __tablename__ = 'payment'
+    __table_args__ = (
+        PrimaryKeyConstraint('paymentrecord_id'),
+    ForeignKeyConstraint(['order_id'], ['Orders.Order_id'], name='FK_orderpay')
+    ,)
+
+    paymentrecord_id = db.Column(db.Integer, autoincrement=True, primark_key=True)
+    order_id = db.Column(db.Integer, nullable=False)
+    payment = db.Column(db.Integer, nullable=False)
+    cardNo =  db.Column(db.Integer)
+    credit_expiration =  db.Column(db.DateTime)
+    security_code = db.Column(db.Integer)
+

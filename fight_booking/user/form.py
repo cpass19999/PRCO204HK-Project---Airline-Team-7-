@@ -26,7 +26,7 @@ class FormRegister(Form):
 
         validators.DataRequired(),
         validators.Length(8,20),
-        validators.Regexp(reg,'Should have at least one uppercase and one lowercase character.'),
+        validators.Regexp(reg, 0, 'Should have at least one uppercase and one lowercase character.'),
 
         validators.EqualTo('password2', message='PASSWORD NEED MATCH')
     ])

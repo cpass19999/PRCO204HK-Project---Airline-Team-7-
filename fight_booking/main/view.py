@@ -5,7 +5,8 @@ from fight_booking import app, flight, decorator_permission
 from fight_booking import db
 from flask import render_template, flash, redirect, url_for, request, abort, session
 from flask_login import login_required, current_user
-from fight_booking.main.form import FormUserInfo, FormRole_Func_manager, Form_User_Role_manager, FormUserEdit
+from fight_booking.main.form import FormUserInfo, FormRole_Func_manager, Form_User_Role_manager, FormUserEdit, \
+    Form_cacredit_card
 from fight_booking.user.form import FormFunc, FormRole
 from fight_booking.user.model import UserReister, Func, Role
 
@@ -202,6 +203,7 @@ def role_manager_e(role_id):
 
 
 @main.route('/role_func_manager/<int:role_id>/', methods=['GET', 'POST'])
+@login_required
 def role_func_manager(role_id):
     """
     角色權限管理
@@ -234,6 +236,7 @@ def role_func_manager(role_id):
     return render_template('main/Role_Func_manager.html', form=form)
 
 @main.route('/user_role_manager/<int:user_id>/', methods=['GET', 'POST'])
+@login_required
 def user_role_manager(user_id):
     """
     使用者角色管理
@@ -267,11 +270,12 @@ def user_role_manager(user_id):
     return render_template('main/User_Role_manager.html', form=form)
 
 @main.route('/manage_menu', methods=['GET', 'POST'])
+@login_required
 def manager_menu():
-
     return render_template('main/manager_menu.html')
 
 @main.route('/manager_order', methods=['GET', 'POST'])
+@login_required
 def manager_order():
     ordercolums = ['order id', 'Order user','from', 'To', 'Paid', 'price']
     users = UserReister.query.all()
@@ -279,8 +283,28 @@ def manager_order():
     return render_template('main/manager_order.html',orders = orders,users = users, ordercolums=ordercolums)
 
 @main.route('/manager_user', methods=['GET', 'POST'])
+@login_required
 def manager_user():
     Usercolumns = ['user id','user name','Full name', 'Email', 'contactNo','gender','address','regist date','available']
     users = UserReister.query.all()
     orders = Order.query.all()
     return render_template('main/manager_user.html',orders = orders,users = users, Usercolumns=Usercolumns)
+
+@main.route('/payment', methods=['GET', 'POST'])
+@login_required
+def payment():
+    form = Form_cacredit_card()
+    #oid = session.get('orderid', None)
+    #oid = 1
+    #order = Flight.query.filter_by(order_id = oid).first_or_404()
+    #order_id =
+    #payment =
+
+    cardNo = form.cardNo.data
+    credit_expiration =  form.credit_expiration.data
+    security_code = form.security_code.data
+    if form.validate_on_submit():
+        return redirect(url_for('main.userinfo', username=current_user.user_username))
+
+    return render_template('main/payment.html', form =form)
+
