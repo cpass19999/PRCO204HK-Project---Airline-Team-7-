@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+
+<div class="page-header">
+    <h1>Role Manager</h1>
+    <h2>Modify Role Permission</h2>
+</div>
+<div class="col-md-4">
+   <form method="POST" action>
+            {{form.hidden_tag()}}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">User Choices</legend>
+                {% if form.all_function_option.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.all_function_option.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% for choice in form.all_function_option %}
+                    <div class="form-check">
+                        {{ choice(class="form-check-input")}}
+                        {{ choice.label(class="form-check-label") }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+   </form>
+</div>
+{% endblock %}

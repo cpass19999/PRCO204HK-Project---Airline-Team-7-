@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+        <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+	<style>
+        .body {
+            background: rgb(224, 255, 255, 0.5);
+        }
+    </style>
+    {% block  head %}
+        {% endblock %}
+    <title>{{ title }}</title>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="{{ url_for('main.index') }}" class="navbar-brand">SFUAirline</a>
+            </div>
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('flight.search_flight') }}">Search Flight</a></li>
+                    {% if current_user.is_authenticated %}
+                    <!-- 透過url_for設定USERINFO連結綁定userinfo -->
+                    <li><a href="{{ url_for('main.userinfo', username = current_user.user_username) }}">UserInfo</a></li>
+                    <!-- 透過url_for設定LOGOUT連結綁定LOGOUT -->
+                    <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+
+                    {% if current_user.has_role('ADMIN') %}
+                    <li><a href="{{url_for('main.manager_menu')}}">Manager</a></li>
+                    {%endif%}
+
+                    {% if current_user.has_role('JUNIOR') %}
+                    <li><a href="{{url_for('flight.add_booking_user')}}">Book for user</a></li>
+                    {%endif%}
+
+                    {% else %}
+                    <li><a href="{{ url_for('user.register') }}">Register</a></li>
+                    <!-- 透過url_for設定LOGIN連結綁定LOGIN -->
+                    <li><a href="{{ url_for('user.login') }}">Login</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('main.contact') }}">Contact us</a></li>					
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+         <!-- 用來接後端傳來的flash-message -->
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        {% block  content %}
+        {% endblock %}
+
+    </div>
+
+    {% block scripts %}{% endblock %}
+
+</body>
+</html>

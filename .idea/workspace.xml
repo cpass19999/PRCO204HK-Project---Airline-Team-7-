@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ea893446-496a-46f3-8190-cbc3da7f5c7d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1aFhMJqCxA647gVPBwQHQ0gu40F" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/FeiFlight-master" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\a\fight_booking\main" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Work\a\fight_booking\templates\booking" />
+      <recent name="D:\Work\a\fight_booking\user" />
+      <recent name="D:\Work\a\fight_booking\airline" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.FeiFlight">
+    <configuration name="FeiFlight" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="a" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads/FeiFlight-master" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/FeiFlight-master/FeiFlight.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="flask_register" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="a" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/flask_register.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.FeiFlight" />
+        <item itemvalue="Python.flask_register" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ea893446-496a-46f3-8190-cbc3da7f5c7d" name="Default Changelist" comment="" />
+      <created>1586337199827</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586337199827</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589537152403">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589094621712" />
+    <state x="3080" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588614917099" />
+    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1589537152403" />
+    <state x="1170" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586337398930">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1170" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1586337398930" />
+    <state x="1220" y="281" key="FileChooserDialogImpl" timestamp="1588768396465">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1220" y="281" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1587972841037" />
+    <state x="1220" y="281" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1588768396465" />
+    <state width="817" height="276" key="GridCell.Tab.0.bottom" timestamp="1588768644242">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="817" height="276" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588768644242" />
+    <state width="817" height="276" key="GridCell.Tab.0.center" timestamp="1588768644241">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="817" height="276" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588768644241" />
+    <state width="817" height="276" key="GridCell.Tab.0.left" timestamp="1588768644241">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="817" height="276" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588768644241" />
+    <state width="817" height="276" key="GridCell.Tab.0.right" timestamp="1588768644242">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="817" height="276" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588768644242" />
+    <state x="880" y="180" key="SettingsEditor" timestamp="1588597697340">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="880" y="180" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1588597697340" />
+    <state x="1053" y="100" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587030606516">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1053" y="100" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1587030606516" />
+    <state x="554" y="119" width="1678" height="1008" key="dock-window-1" timestamp="1589536147948">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1087" y="28" width="840" height="1019" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589453601841" />
+    <state x="554" y="119" width="1678" height="1008" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1589536147948" />
+    <state x="590" y="-16" width="995" height="1027" maximized="true" key="dock-window-2" timestamp="1589125446800">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="590" y="-16" width="995" height="1027" maximized="true" key="dock-window-2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589125446800" />
+    <state x="790" y="17" width="1027" height="1024" key="dock-window-2/0.0.1920.1040@0.0.1920.1040" timestamp="1588775456179" />
+    <state x="272" y="31" width="614" height="735" key="find.popup" timestamp="1588769465704">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="272" y="31" width="614" height="735" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588769465704" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/fight_booking/main/view.py</url>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

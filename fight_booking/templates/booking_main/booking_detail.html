@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+
+<h1>Search Result</h1>
+
+<div class="page-header">
+    {% if order.flight_d('r')%}
+    Triptype : Round trip
+    {% else %}
+    Triptype : one way
+    {% endif %}
+</div>
+    <div class="col-md-6">
+        <h3>Depart flight</h3>
+         {% if flight_d %}
+    <table class="table">
+        <tr>
+            <td>{{ columns[0] }}</td>
+            <td>{{flight_d.airline.airlineName}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[1] }}</td>
+            <td>{{flight_d.from_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[2] }}</td>
+            <td>{{flight_d.to_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[3] }}</td>
+            <td>{{ flight_d.depart_Date }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[4] }}</td>
+            <td>{{ flight_d.depart_Time }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[5] }}</td>
+            <td>{{ flight_d.price }}</td>
+        </tr>
+    </table>
+    {%else%}
+        No data
+    {% endif %}
+    </div>
+
+{% if flight_r %}
+<div class="col-md-6">
+    <h3>Return flight</h3>
+    <table class="table">
+        <tr>
+            <td>{{ columns[0] }} :</td>
+            <td>{{flight_r.airline.airlineName}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[1] }}:</td>
+            <td>{{flight_r.from_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[2] }}:</td>
+            <td>{{flight_r.to_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[3] }}:</td>
+            <td>{{ flight_r.depart_Date }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[4] }}:</td>
+            <td>{{ flight_r.depart_Time }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[5] }}:</td>
+            <td>{{ flight_r.price }}</td>
+        </tr>
+    </table>
+
+    </div>
+{% endif %}
+
+{% endblock %}
