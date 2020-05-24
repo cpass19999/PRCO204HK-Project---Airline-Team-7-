@@ -44,6 +44,11 @@ def index():
                 flash('Retrun date must after depart date')
 
     return render_template('index.html',form = form)
+    
+@main.route('/contact')
+def contact():
+
+    return render_template('contact.html')
 
 @main.route('/edituserinfo', methods=['GET', 'POST'])
 @login_required

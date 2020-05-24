@@ -12,6 +12,11 @@
         <script src="/static/scripts/jquery-1.10.2.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>
     <script src="/static/scripts/respond.js"></script>
+	<style>
+        .body {
+            background: rgb(224, 255, 255, 0.5);
+        }
+    </style>
     {% block  head %}
         {% endblock %}
     <title>{{ title }}</title>
@@ -26,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="{{ url_for('main.index') }}" class="navbar-brand">Filght booking</a>
+                <a href="{{ url_for('main.index') }}" class="navbar-brand">SFUAirline</a>
             </div>
 
             <div class="navbar-collapse collapse">
@@ -34,9 +39,9 @@
                     <li><a href="{{ url_for('flight.search_flight') }}">Search Flight</a></li>
                     {% if current_user.is_authenticated %}
                     <!-- 透過url_for設定USERINFO連結綁定userinfo -->
-                    <li><a href="{{ url_for('main.userinfo', username = current_user.user_username) }}">USERINFO</a></li>
+                    <li><a href="{{ url_for('main.userinfo', username = current_user.user_username) }}">UserInfo</a></li>
                     <!-- 透過url_for設定LOGOUT連結綁定LOGOUT -->
-                    <li><a href="{{ url_for('user.logout') }}">LOGOUT</a></li>
+                    <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
 
                     {% if current_user.has_role('ADMIN') %}
                     <li><a href="{{url_for('main.manager_menu')}}">Manager</a></li>
@@ -49,16 +54,16 @@
                     {% else %}
                     <li><a href="{{ url_for('user.register') }}">Register</a></li>
                     <!-- 透過url_for設定LOGIN連結綁定LOGIN -->
-                    <li><a href="{{ url_for('user.login') }}">LOGIN</a></li>
+                    <li><a href="{{ url_for('user.login') }}">Login</a></li>
                     {% endif %}
-
+                    <li><a href="{{ url_for('main.contact') }}">Contact us</a></li>					
 
                 </ul>
             </div>
         </div>
     </div>
 
-    <div class="container body-content">
+    <div class="body">
          <!-- 用來接後端傳來的flash-message -->
         {% for message in get_flashed_messages() %}
         <div class="alert alert-warning">
