@@ -143,9 +143,6 @@ if( not Role.query.filter_by(name = 'ADMIN').first()):
     db.session.add(role_JUNIOR)
     db.session.add(role_SENIOR)
 
-    db.session.add()
-
-
     db.session.add(admin)
     db.session.add(senior)
     db.session.add(s1001)
