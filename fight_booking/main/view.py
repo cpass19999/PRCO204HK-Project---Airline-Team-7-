@@ -271,11 +271,13 @@ def user_role_manager(user_id):
 
 @main.route('/manage_menu', methods=['GET', 'POST'])
 @login_required
+@decorator_permission.decorator_permission
 def manager_menu():
     return render_template('main/manager_menu.html')
 
 @main.route('/manager_order', methods=['GET', 'POST'])
 @login_required
+@decorator_permission.decorator_permission
 def manager_order():
     ordercolums = ['order id', 'Order user','from', 'To', 'Paid', 'price']
     users = UserReister.query.all()
@@ -284,6 +286,7 @@ def manager_order():
 
 @main.route('/manager_user', methods=['GET', 'POST'])
 @login_required
+@decorator_permission.decorator_permission
 def manager_user():
     Usercolumns = ['user id','user name','Full name', 'Email', 'contactNo','gender','address','regist date','available']
     users = UserReister.query.all()
