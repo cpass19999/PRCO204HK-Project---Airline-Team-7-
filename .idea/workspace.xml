@@ -15,9 +15,12 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+=======
+>>>>>>> master
   <component name="ProjectId" id="1aFhMJqCxA647gVPBwQHQ0gu40F" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,6 +30,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/FeiFlight-master" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
@@ -34,11 +38,17 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Work\a\fight_booking\main" />
     </key>
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Airline-Reservation-System-master" />
+  </component>
+  <component name="RecentsManager">
+>>>>>>> master
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\a\fight_booking\templates\booking" />
       <recent name="D:\Work\a\fight_booking\user" />
       <recent name="D:\Work\a\fight_booking\airline" />
     </key>
+<<<<<<< HEAD
   </component>
   <component name="RunManager" selected="Python.FeiFlight">
     <configuration name="FeiFlight" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -62,6 +72,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+=======
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Work\a\fight_booking\main" />
+    </key>
+  </component>
+  <component name="RunManager">
+>>>>>>> master
     <configuration name="flask_register" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="a" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,7 +102,10 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
         <item itemvalue="Python.FeiFlight" />
+=======
+>>>>>>> master
         <item itemvalue="Python.flask_register" />
       </list>
     </recent_temporary>
@@ -104,16 +124,24 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590319023858">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1590319023858" />
     <state x="3080" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1588614917099" />
     <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1589537152403" />
+=======
+    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586953229441">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1160" y="328" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586953229441" />
+>>>>>>> master
     <state x="1170" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586337398930">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1170" y="269" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1586337398930" />
+<<<<<<< HEAD
     <state x="1220" y="281" key="FileChooserDialogImpl" timestamp="1588768396465">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -139,10 +167,33 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="880" y="180" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1588597697340" />
+=======
+    <state x="1220" y="281" key="FileChooserDialogImpl" timestamp="1587972841037">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1220" y="281" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1587972841037" />
+    <state width="936" height="279" key="GridCell.Tab.0.bottom" timestamp="1586349458823">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586349458823" />
+    <state width="936" height="279" key="GridCell.Tab.0.center" timestamp="1586349458822">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586349458822" />
+    <state width="936" height="279" key="GridCell.Tab.0.left" timestamp="1586349458822">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586349458822" />
+    <state width="936" height="279" key="GridCell.Tab.0.right" timestamp="1586349458822">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="936" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586349458822" />
+>>>>>>> master
     <state x="1053" y="100" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587030606516">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1053" y="100" width="774" height="847" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1587030606516" />
+<<<<<<< HEAD
     <state x="554" y="119" width="1678" height="1008" key="dock-window-1" timestamp="1589536147948">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -157,6 +208,8 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="272" y="31" width="614" height="735" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588769465704" />
+=======
+>>>>>>> master
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

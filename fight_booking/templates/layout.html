@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
 
 
     <meta charset="utf-8" />
@@ -20,6 +21,16 @@
     {% block  head %}
         {% endblock %}
     <title>{{ title }}</title>
+=======
+    {% block title %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
+    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+	{% endblock %}
+>>>>>>> master
 </head>
 
 <body>
@@ -31,11 +42,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+<<<<<<< HEAD
                 <a href="{{ url_for('main.index') }}" class="navbar-brand">SFUAirline</a>
+=======
+                <a href="{{ url_for('main.index') }}" class="navbar-brand">Filght booking</a>
+>>>>>>> master
             </div>
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+<<<<<<< HEAD
                     <li><a href="{{ url_for('flight.search_flight') }}">Search Flight</a></li>
                     {% if current_user.is_authenticated %}
                     <!-- 透過url_for設定USERINFO連結綁定userinfo -->
@@ -58,12 +74,28 @@
                     {% endif %}
                     <li><a href="{{ url_for('main.contact') }}">Contact us</a></li>					
 
+=======
+                    {% if current_user.is_authenticated %}
+                    <!-- 透過url_for設定USERINFO連結綁定userinfo -->
+                    <li><a href="{{ url_for('main.edituserinfo') }}">USERINFO</a></li>
+                    <!-- 透過url_for設定LOGOUT連結綁定LOGOUT -->
+                    <li><a href="{{ url_for('user.logout') }}">LOGOUT</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('user.register') }}">Register</a></li>
+                    <!-- 透過url_for設定LOGIN連結綁定LOGIN -->
+                    <li><a href="{{ url_for('user.login') }}">LOGIN</a></li>
+                    {% endif %}
+>>>>>>> master
                 </ul>
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class="body">
+=======
+    <div class="container body-content">
+>>>>>>> master
          <!-- 用來接後端傳來的flash-message -->
         {% for message in get_flashed_messages() %}
         <div class="alert alert-warning">
@@ -71,11 +103,25 @@
         </div>
         {% endfor %}
 
+<<<<<<< HEAD
         {% block  content %}
         {% endblock %}
 
     </div>
 
+=======
+        {% block content %}
+        {% endblock %}
+        <hr />
+        <footer>
+            <p>&copy; {{ year }} </p>
+        </footer>
+    </div>
+
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <script src="/static/scripts/bootstrap.js"></script>
+    <script src="/static/scripts/respond.js"></script>
+>>>>>>> master
     {% block scripts %}{% endblock %}
 
 </body>

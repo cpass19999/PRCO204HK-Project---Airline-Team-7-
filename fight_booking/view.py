@@ -1,27 +1,20 @@
-from fight_booking.user import user
+from fight_booking import app
 from fight_booking import db
-from flask import render_template, flash, redirect, url_for, request
-from fight_booking.user.model import UserReister
-from fight_booking.user.form import FormRegister, FormLogin, FormChangePWD, FormResetPasswordMail, FormResetPassword
+from flask import render_template,flash, redirect, url_for, request
+from fight_booking.model import UserReister
+from fight_booking.form import FormRegister , FormLogin ,FormChangePWD,FormResetPasswordMail,FormResetPassword
 from fight_booking.sendmail import send_mail
-from flask_login import login_user, current_user, login_required, logout_user
+from flask_login import login_user, current_user, login_required,logout_user
 
-
-@user.route('/')
+@app.route('/')
 @login_required
 def index():
-    return 'Hello ' + current_user.user_username + ' Welcome My HomePage'
+    return 'Hello ' + current_user.user_username +' Welcome My HomePage'
 
-
-@user.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = FormRegister()
+    form =FormRegister()
     if form.validate_on_submit():
-<<<<<<< HEAD
-        pw = form.password.data
-
-=======
->>>>>>> master
         user = UserReister(
             user_username=form.username.data,
             user_email=form.email.data,
@@ -43,8 +36,7 @@ def register():
         return 'Check Your Email and Activate Your Account'
     return render_template('register.html', form=form)
 
-
-@user.route('/user_confirm/<token>')
+@app.route('/user_confirm/<token>')
 def user_confirm(token):
     user = UserReister()
     data = user.validate_confirm_token(token)
@@ -58,12 +50,12 @@ def user_confirm(token):
         return 'wrong token'
 
 
-@user.route('/test')
+@app.route('/test')
 def test_index():
     return render_template('base.html')
 
 
-@user.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = FormLogin()
     if form.validate_on_submit():
@@ -81,11 +73,7 @@ def login():
                 if not next_is_valid(next):
                     #  如果使用者沒有該url權限，那就reject掉。
                     return 'Bad Boy!!'
-<<<<<<< HEAD
-                return redirect(next or 'https://' +url_for('index'))
-=======
                 return redirect(next or url_for('index'))
->>>>>>> master
                 # return 'Welcome' + current_user.username
             else:
                 #  如果密碼驗證錯誤，就顯示錯誤訊息。
@@ -93,19 +81,18 @@ def login():
     return render_template('login.html', form=form)
 
 
-@user.route('/logout')
+@app.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash('Log Out See You.')
-    return redirect(url_for('user.login'))
+    return redirect(url_for('login'))
 
 
-@user.route('/userinfo')
+@app.route('/userinfo')
 @login_required
 def userinfo():
     return 'Here is UserINFO'
-
 
 #  加入function
 def next_is_valid(url):
@@ -117,8 +104,7 @@ def next_is_valid(url):
     """
     return True
 
-
-@user.before_app_request
+@app.before_request
 def before_request():
     """
     在使用者登入之後，需做一個帳號是否啟動的驗證，啟動之後才能向下展開相關的應用。
@@ -127,22 +113,15 @@ def before_request():
     條件三：endpoint不等於static，這是避免靜態資源的取用異常，如icon、js、css等..
     :return:
     """
-<<<<<<< HEAD
-    if (    current_user.is_authenticated and
-            not current_user.user_confirm and
-            request.endpoint not in ['user.re_userconfirm', 'user.logout', 'user.user_confirm', 'user.resetpassword'] and
-=======
     if (current_user.is_authenticated and
             not current_user.user_confirm and
             request.endpoint not in ['re_userconfirm', 'logout', 'user_confirm', 'resetpassword'] and
->>>>>>> master
             request.endpoint != 'static'):
         #  條件滿足就引導至未啟動說明
         flash('Hi, please activate your account first.')
         return render_template('unactivate.html')
 
-
-@user.route('/reusreconfirm')
+@app.route('/reusreconfirm')
 @login_required
 def re_userconfirm():
     """
@@ -165,7 +144,7 @@ def re_userconfirm():
     return redirect(url_for('index'))
 
 
-@user.route('/changepassword', methods=['GET', 'POST'])
+@app.route('/changepassword', methods=['GET', 'POST'])
 @login_required
 def changepassword():
     form = FormChangePWD()
@@ -179,18 +158,16 @@ def changepassword():
             return redirect(url_for('logout'))
         else:
             flash('Wrong Password...')
-    return render_template('changepassword.html', form=form)
+    return render_template('changepassword.html', form = form)
 
-
-@user.route('/resetpassword', methods=['GET', 'POST'])
+@app.route('/resetpassword', methods=['GET', 'POST'])
 def reset_password():
     form = FormResetPasswordMail()
     if form.validate_on_submit():
         return 'RESET'
     return render_template('resetpasswordemail.html', form=form)
 
-
-@user.route('/resetpassword/<token>', methods=['GET', 'POST'])
+@app.route('/resetpassword/<token>', methods=['GET', 'POST'])
 def reset_password_recive(token):
     """使用者透過申請連結進來之後，輸入新的密碼設置，接著要驗證token是否過期以及是否確實有其user存在
     這邊使用者並沒有登入，所以記得不要很順手的使用current_user了。

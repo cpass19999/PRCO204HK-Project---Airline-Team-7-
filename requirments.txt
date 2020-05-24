@@ -9,5 +9,9 @@ flask_mail
 flask_login
 flask_babel
 flask_markdown
+<<<<<<< HEAD
 flask-blueprint
 pyOpenSSL
+=======
+flask-blueprint
+>>>>>>> master

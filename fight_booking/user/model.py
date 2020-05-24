@@ -1,12 +1,21 @@
+<<<<<<< HEAD
 from sqlalchemy import PrimaryKeyConstraint, text
 from fight_booking import db, bcrypt
 from itsdangerous import TimedJSONWebSignatureSerializer
 from itsdangerous import SignatureExpired, BadSignature
 from flask import current_app, flash
+=======
+from sqlalchemy import PrimaryKeyConstraint
+from fight_booking import db, bcrypt
+from itsdangerous import TimedJSONWebSignatureSerializer
+from itsdangerous import SignatureExpired, BadSignature
+from flask import current_app
+>>>>>>> master
 from flask_login import UserMixin
 from fight_booking import login
 from datetime import datetime
 
+<<<<<<< HEAD
 ##  設置中繼的關聯表
 #  flask-sqlalchemy會自動的在資料庫中產生相對應的table
 relations_user_role = db.Table('relation_user_role',
@@ -19,6 +28,8 @@ relations_role_func = db.Table('relations_role_func',
                                db.Column('func_id', db.Integer, db.ForeignKey('funcs.id')),
                                db.Column('role_id', db.Integer, db.ForeignKey('roles.id')))
 
+=======
+>>>>>>> master
 
 class UserReister(UserMixin, db.Model):
     """記錄使用者資料的資料表"""
@@ -26,7 +37,11 @@ class UserReister(UserMixin, db.Model):
     __table_args__ = (
         PrimaryKeyConstraint('user_id'),
     )
+<<<<<<< HEAD
     user_id = db.Column(db.Integer, autoincrement=True, primark_key=True)
+=======
+    user_id = db.Column(db.Integer, autoincrement=True , primark_key=True)
+>>>>>>> master
     user_username = db.Column(db.String(80), unique=True, nullable=False)
     user_email = db.Column(db.String(80), unique=True, nullable=False)
     # user_password = db.Column(db.String(50), nullable=False)
@@ -34,6 +49,7 @@ class UserReister(UserMixin, db.Model):
     password_hash = db.Column(db.String(150), nullable=False)
     user_fullname = db.Column(db.String(50))
     passportID = db.Column(db.String(20))
+<<<<<<< HEAD
     passport_expiration = db.Column(db.DateTime)
     passport_country = db.Column(db.String(20))
     contactNo = db.Column(db.Integer)
@@ -48,6 +64,19 @@ class UserReister(UserMixin, db.Model):
     orders = db.relationship("Order", backref=db.backref('users', lazy=True))
 
     roles = db.relationship('Role', secondary=relations_user_role, lazy='subquery', backref=db.backref('users', lazy=True))
+=======
+    passport_expiration = db.Column(db.String(20))
+    passport_country = db.Column(db.String(20))
+    contactNo = db.Column(db.Integer)
+    #about_me = db.Column(db.Text())
+
+    gender = db.Column(db.Text)
+    address = db.Column(db.String(20))
+    regist_date = db.Column(db.DateTime, default = datetime.utcnow())
+    last_login = db.Column(db.DateTime, default = datetime.utcnow())
+
+    #flights = db.relationship("Flight", secondary="booking" , lazy='subquery' , backref=db.backref('users', lazy=True) )
+>>>>>>> master
 
     @property
     def password(self):
@@ -92,7 +121,11 @@ class UserReister(UserMixin, db.Model):
         return data
 
     def get_id(self):
+<<<<<<< HEAD
         return self.user_id
+=======
+        return (self.user_id)
+>>>>>>> master
 
     def create_reset_token(self, expires_in=3600):
         """
@@ -103,6 +136,7 @@ class UserReister(UserMixin, db.Model):
         s = TimedJSONWebSignatureSerializer(current_app.config['SECRET_KEY'], expires_in=expires_in)
         return s.dumps({'reset_id': self.id})
 
+<<<<<<< HEAD
     def check_admin(self, func_module, func_name):
         """
         檢查使用者是否有權限進入該View Function
@@ -152,12 +186,18 @@ class UserReister(UserMixin, db.Model):
             .filter(UserReister.user_id == self.user_id)
         return func_list
 
+=======
+    def __repr__(self):
+        return 'user_username:%s, user_email:%s' % (self.user_username, self.user_email)
+
+>>>>>>> master
 
 @login.user_loader
 def load_user(user_id):
     return UserReister.query.get(int(user_id))
 
 
+<<<<<<< HEAD
 class Role(db.Model):
     """
     權限角色主表
@@ -213,3 +253,8 @@ class Func(db.Model):
         return 'id = %i, module_name = %s, is_activate = %s'
 
 # db.create_all()
+=======
+#db.create_all()
+
+
+>>>>>>> master

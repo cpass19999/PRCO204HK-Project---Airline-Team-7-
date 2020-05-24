@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from fight_booking.flight.form import From_search_flight
 from fight_booking.flight.model import Flight, Order
 from fight_booking.main import main
@@ -14,11 +15,27 @@ from fight_booking.user.model import UserReister, Func, Role
 @main.route('/')
 @main.route('/index', methods=['GET', 'POST'])
 @app.route('/')
+=======
+from fight_booking.main import main
+from fight_booking import app
+from fight_booking import db
+from flask import render_template, flash, redirect, url_for, request, abort
+from flask_login import login_required, current_user
+from fight_booking.main.form import FormUserInfo
+from fight_booking.user.model import UserReister
+
+
+@main.route('/')
+@main.route('/index')
+@app.route('/')
+@login_required
+>>>>>>> master
 def index():
     """
     首頁
     :return:
     """
+<<<<<<< HEAD
     form = From_search_flight()
     if form.validate_on_submit():
         flight = Flight.query.filter_by(from_place = form.from_place.data , to_place = form.to_place.data,available = 'Upcoming', depart_Date = form.depart_date.data.strftime("%Y-%m-%d"), ).all()
@@ -49,6 +66,9 @@ def index():
 def contact():
 
     return render_template('contact.html')
+=======
+    return render_template('index.html')
+>>>>>>> master
 
 @main.route('/edituserinfo', methods=['GET', 'POST'])
 @login_required
@@ -71,6 +91,7 @@ def edituserinfo():
     form.gender.data = current_user.gender
     return render_template('main/editUserInfo.html', form=form)
 
+<<<<<<< HEAD
 @main.route('/edituser/<username>', methods=['GET', 'POST'])
 @login_required
 def edituser(username):
@@ -313,3 +334,12 @@ def payment():
 
     return render_template('main/payment.html', form =form)
 
+=======
+@main.route('/userinfo/<username>')
+@login_required
+def userinfo(username):
+    user = UserReister.query.filter_by(user_username= username).first()
+    if user is None:
+        abort(404)
+    return render_template('main/UserInfo.html', user=user)
+>>>>>>> master

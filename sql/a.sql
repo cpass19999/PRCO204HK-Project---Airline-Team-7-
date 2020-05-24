@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- Airlines
 insert into airline values(null,"Emirates","EA");
 insert into airline values(null,"Korea Air","KA");
@@ -49,3 +50,17 @@ insert into tbl_flight (airlineName,airplacneModel,from_place,to_place,depart_Da
 					   ("Lufthansa", 777, "JFK",  "DFW",  "2020-04-19","22:30:00", "Upcoming", 800), 
 					   ("American Airlines", 797, "JFK",   "DFW", "2020-04-19","22:30:00","Upcoming", 800);
 
+=======
+CREATE TABLE IF NOT EXISTS `airline`.`tbl_user` (
+  `user_id` BIGINT AUTO_INCREMENT,
+  `user_name` VARCHAR(45) NULL,
+  `user_username` VARCHAR(45) NULL,
+  `user_password` VARCHAR(45) NULL,
+  `user_email` VARCHAR(45) NULL,
+  `user_confirm` Boolean  default '0',
+  `password_hash` VARCHAR(150) NULL,
+  PRIMARY KEY (`user_id`));
+  
+
+  
+>>>>>>> master

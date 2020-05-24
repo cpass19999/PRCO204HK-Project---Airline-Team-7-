@@ -1,13 +1,8 @@
-<<<<<<< HEAD
-import re
-
-=======
->>>>>>> master
 from flask_wtf import Form
-from wtforms import StringField, SubmitField, validators, SelectField, TextAreaField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, validators, PasswordField,BooleanField
 from wtforms.fields.html5 import EmailField
 
-from fight_booking.user.model import UserReister
+from fight_booking.model import UserReister
 
 
 class FormRegister(Form):
@@ -15,10 +10,6 @@ class FormRegister(Form):
 
     password2: 用來確認兩次的密碼輸入相同
     """
-<<<<<<< HEAD
-    reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,20}$"
-=======
->>>>>>> master
     username = StringField('UserName', validators=[
         validators.DataRequired(),
         validators.Length(5, 30)
@@ -29,16 +20,8 @@ class FormRegister(Form):
         validators.Email()
     ])
     password = PasswordField('PassWord', validators=[
-<<<<<<< HEAD
-
-        validators.DataRequired(),
-        validators.Length(8,20),
-        validators.Regexp(reg, 0, 'Should have at least one uppercase and one lowercase character.'),
-=======
         validators.DataRequired(),
         validators.Length(8, 20),
->>>>>>> master
-
         validators.EqualTo('password2', message='PASSWORD NEED MATCH')
     ])
     password2 = PasswordField('Confirm PassWord', validators=[
@@ -55,11 +38,6 @@ class FormRegister(Form):
         if UserReister.query.filter_by(user_username=field.data).first():
             raise  validators.ValidationError('UserName already register by somebody')
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> master
 class FormLogin(Form):
     """
     使用者登入使用
@@ -129,35 +107,3 @@ class FormResetPassword(Form):
         validators.DataRequired()
     ])
     submit = SubmitField('Reset Password')
-
-<<<<<<< HEAD
-
-class FormFunc(Form):
-    """ViewFunction註冊用表單"""
-    func_module_name = StringField('func_module_name', validators=[
-        validators.DataRequired(),
-        validators.Length(max=50, message="Max Length equal 50")
-    ])
-    func_description = StringField('func_description', validators=[
-        validators.DataRequired(),
-        validators.Length(max=100, message="Max Length equal 100")
-    ])
-    func_is_activate = BooleanField('is_activate', default="checked")
-    func_remark = StringField('func_remark', validators=[
-        validators.DataRequired(),
-        validators.Length(max=100, message="Max Length equal 100")
-    ])
-    submit = SubmitField('Add New View Function')
-
-class FormRole(Form):
-    """Role角色管理用表單"""
-    name = StringField('role_name', validators=[
-        validators.DataRequired(),
-        validators.Length(max=50, message='Max Length equal 50')
-    ])
-
-    submit = SubmitField('Add New Role')
-
-
-=======
->>>>>>> master

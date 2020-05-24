@@ -1,4 +1,5 @@
 from fight_booking.main import main
+<<<<<<< HEAD
 from fight_booking import app, decorator_permission
 from. import flight
 from fight_booking import db
@@ -205,3 +206,12 @@ def search_flight_func():
                                         f_place =form.from_place.data , t_place = form.to_place.data))
                 flash ('No flight found ' )
         flash('Retrun date must after depart date')
+=======
+from fight_booking import app
+from fight_booking import db
+from flask import render_template, flash, redirect, url_for, request
+from flask_login import login_required, current_user
+from fight_booking.main.form import FormUserInfo
+
+
+>>>>>>> master

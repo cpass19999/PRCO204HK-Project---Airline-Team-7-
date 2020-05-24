@@ -1,7 +1,12 @@
 from flask_wtf import Form
+<<<<<<< HEAD
 from wtforms import StringField, SubmitField, validators, SelectField, TextAreaField, SelectMultipleField, widgets, \
     BooleanField
 from wtforms.fields.html5 import EmailField, DateField, IntegerField
+=======
+from wtforms import StringField, SubmitField, validators, SelectField, TextAreaField
+from wtforms.fields.html5 import EmailField
+>>>>>>> master
 
 
 class FormUserInfo(Form):
@@ -11,8 +16,11 @@ class FormUserInfo(Form):
     editor：Shaoe.Chen
     """
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> master
     user_fullname = StringField('Full name', validators=[
         validators.DataRequired()
     ])
@@ -36,6 +44,7 @@ class FormUserInfo(Form):
     gender = SelectField('Gender', validators=[
         validators.DataRequired()
      ], choices=[('F', 'Female'), ('M', 'Man')])
+<<<<<<< HEAD
     submit = SubmitField('Submit UserInfo')
 
 class FormUserEdit(Form):
@@ -111,3 +120,6 @@ class Form_cacredit_card(Form):
             validators.DataRequired()
         ])
     submit = SubmitField('pay')
+=======
+    submit = SubmitField('Submit UserInfo')
+>>>>>>> master

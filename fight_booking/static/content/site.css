@@ -1,10 +1,15 @@
 body {
+<<<<<<< HEAD
      padding-top: 50px;
     padding-bottom: 20px;
 	background-image: url('../img/background3.jpg');
 	background-size: cover;
 background-repeat: no-repeat;
 
+=======
+    padding-top: 50px;
+    padding-bottom: 20px;
+>>>>>>> master
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -43,6 +48,7 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+<<<<<<< HEAD
 }
 
 
@@ -325,3 +331,6 @@ input[type="checkbox"].input-validation-error {
       -moz-animation: iconTranslateY 0.5s forwards;
       -o-animation: iconTranslateY 0.5s forwards;
       animation: iconTranslateY 0.5s forwards; }
+=======
+}
+>>>>>>> master
