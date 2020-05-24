@@ -8,7 +8,9 @@
 </div>
 
       <div class="post-editor">
-            <a href="{{ url_for('main.edituserinfo') }}">Update personal data</a>
+          <button type="button" onclick="window.location.href='{{ url_for('main.edituserinfo')}}';">Update personal data</button>
+          <br>
+          <button type="button" onclick="window.location.href='{{ url_for( 'user.changepassword') }}';"> Change Password </button>
       </div>
 
     <div name="userinfo-div">
