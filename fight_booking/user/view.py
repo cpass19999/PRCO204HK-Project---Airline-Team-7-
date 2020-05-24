@@ -17,6 +17,8 @@ def index():
 def register():
     form = FormRegister()
     if form.validate_on_submit():
+        pw = form.password.data
+
         user = UserReister(
             user_username=form.username.data,
             user_email=form.email.data,
@@ -76,7 +78,7 @@ def login():
                 if not next_is_valid(next):
                     #  如果使用者沒有該url權限，那就reject掉。
                     return 'Bad Boy!!'
-                return redirect(next or url_for('index'))
+                return redirect(next or 'https://' +url_for('index'))
                 # return 'Welcome' + current_user.username
             else:
                 #  如果密碼驗證錯誤，就顯示錯誤訊息。
@@ -118,9 +120,9 @@ def before_request():
     條件三：endpoint不等於static，這是避免靜態資源的取用異常，如icon、js、css等..
     :return:
     """
-    if (current_user.is_authenticated and
+    if (    current_user.is_authenticated and
             not current_user.user_confirm and
-            request.endpoint not in ['re_userconfirm', 'logout', 'user_confirm', 'resetpassword'] and
+            request.endpoint not in ['user.re_userconfirm', 'user.logout', 'user.user_confirm', 'user.resetpassword'] and
             request.endpoint != 'static'):
         #  條件滿足就引導至未啟動說明
         flash('Hi, please activate your account first.')

@@ -1,18 +1,73 @@
 {% extends "layout.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+
 {% block content %}
 
-<div class="page-header">
+<div >
     <h1>UserINFO</h1>
 </div>
- <div>
-     {% if user.address %}
-        <p>{{user.user_fullname}} live in {{ user.address }}</p>
-     {% endif %}
 
+      <div class="post-editor">
+          <button type="button" onclick="window.location.href='{{ url_for('main.edituserinfo')}}';">Update personal data</button>
+          <br>
+          <button type="button" onclick="window.location.href='{{ url_for( 'user.changepassword') }}';"> Change Password </button>
+      </div>
 
-     {% if user.contactNo %}
-        <p>contact Number :{{ user.contactNo }}</p>
-     {% endif %}
+    <div name="userinfo-div">
+        {% if user %}
+    <table class="table">
+        <tr>
+            <td>{{ Usercolumns[0] }}</td>
+            <td>{{user.user_fullname}}</td>
+        </tr>
+        <tr>
+            <td>{{ Usercolumns[1] }}</td>
+            <td>{{user.user_email}}</td>
+        </tr>
+        <tr>
+            <td>{{ Usercolumns[2] }}</td>
+            <td>{{user.contactNo}}</td>
+        </tr>
+    </table>
+        {% endif %}
+    </div>
+
+<br><br>
+<div name="user_order-div">
+    Order record:
+    {% if user.orders %}
+    <table class="table">
+        <thead>
+            <tr>
+                {% for column in ordercolums %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        {% for order in user.orders %}
+            <tr>
+                <td>{{ order.Order_id }}</td>
+                <td>{{order.flight_d('d').from_place}}</td>
+                <td>{{order.flight_d('r').from_place}}</td>
+                {% if order.paid %}
+
+                <td>paid</td>
+                <td>{{order.price}}</td>
+                <td></td>
+
+                    {%else%}
+
+                <td>not pay</td>
+                <td>{{order.price}}</td>
+                <td><button type="button" onclick="window.location.href='{{ url_for( 'flight.order_detail' , order_id = order.Order_id ) }}';"> Pay Now </button> </td>
+                    {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        no booking record.
+    {% endif %}
 </div>
+
+
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+<div class="page-header">
+    <h1>Hello, {{ current_user.user_username }}</h1>
+</div>
+
+<div class="container">
+<table class="table">
+        <thead>
+            <tr>
+                {% for column in ordercolums %}
+                <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.Order_id }}</td>
+                <td>{{ order.Orderuser.user_username }}</td>
+                <td>{{order.flight_d('d').from_place}}</td>
+                {% if order.return_flightid %}
+                <td>{{order.flight_d('r').from_place}}</td>
+                {%else%}
+                <td>{{order.flight_d('d').to_place}}</td>
+                {% endif %}
+
+                {% if order.paid %}
+
+                <td>paid</td>
+                <td>{{order.price}}</td>
+                <td></td>
+
+                    {%else%}
+
+                <td>not pay</td>
+                <td>{{order.price}}</td>
+                <td><button type="button" onclick="window.location.href='{{ url_for( 'flight.order_detail' , order_id = order.Order_id ) }}';"> Pay Now </button> </td>
+                    {% endif %}
+                <td><button>edit</button></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

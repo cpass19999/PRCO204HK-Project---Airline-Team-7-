@@ -1,3 +1,5 @@
+import re
+
 from flask_wtf import Form
 from wtforms import StringField, SubmitField, validators, SelectField, TextAreaField, PasswordField, BooleanField
 from wtforms.fields.html5 import EmailField
@@ -10,6 +12,7 @@ class FormRegister(Form):
 
     password2: 用來確認兩次的密碼輸入相同
     """
+    reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,20}$"
     username = StringField('UserName', validators=[
         validators.DataRequired(),
         validators.Length(5, 30)
@@ -20,8 +23,10 @@ class FormRegister(Form):
         validators.Email()
     ])
     password = PasswordField('PassWord', validators=[
+
         validators.DataRequired(),
-        validators.Length(8, 20),
+        validators.Length(8,20),
+        validators.Regexp(reg, 0, 'Should have at least one uppercase and one lowercase character.'),
 
         validators.EqualTo('password2', message='PASSWORD NEED MATCH')
     ])
@@ -38,6 +43,8 @@ class FormRegister(Form):
     def validate_username(self, field):
         if UserReister.query.filter_by(user_username=field.data).first():
             raise  validators.ValidationError('UserName already register by somebody')
+
+
 
 class FormLogin(Form):
     """
@@ -108,4 +115,32 @@ class FormResetPassword(Form):
         validators.DataRequired()
     ])
     submit = SubmitField('Reset Password')
+
+
+class FormFunc(Form):
+    """ViewFunction註冊用表單"""
+    func_module_name = StringField('func_module_name', validators=[
+        validators.DataRequired(),
+        validators.Length(max=50, message="Max Length equal 50")
+    ])
+    func_description = StringField('func_description', validators=[
+        validators.DataRequired(),
+        validators.Length(max=100, message="Max Length equal 100")
+    ])
+    func_is_activate = BooleanField('is_activate', default="checked")
+    func_remark = StringField('func_remark', validators=[
+        validators.DataRequired(),
+        validators.Length(max=100, message="Max Length equal 100")
+    ])
+    submit = SubmitField('Add New View Function')
+
+class FormRole(Form):
+    """Role角色管理用表單"""
+    name = StringField('role_name', validators=[
+        validators.DataRequired(),
+        validators.Length(max=50, message='Max Length equal 50')
+    ])
+
+    submit = SubmitField('Add New Role')
+
 

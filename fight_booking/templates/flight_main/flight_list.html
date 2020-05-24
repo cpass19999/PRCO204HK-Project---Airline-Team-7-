@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+
+<div class="page-header">
+
+    <div class="col-md-4">
+         {% if flight_d %}
+    <table class="table">
+        <tr>
+            <td>{{ columns[0] }}</td>
+            <td>{{flight_d.airline}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[1] }}</td>
+            <td>{{flight_d.from_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[2] }}</td>
+            <td>{{flight_d.to_place}}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[3] }}</td>
+            <td>{{ flight_d.depart_Date }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[4] }}</td>
+            <td>{{ flight_d.depart_Time }}</td>
+        </tr>
+        <tr>
+            <td>{{ columns[5] }}</td>
+            <td>{{ flight_d.price }}</td>
+        </tr>
+    </table>
+    {% endif %}
+    </div>
+    <div class="col-md-4">
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}

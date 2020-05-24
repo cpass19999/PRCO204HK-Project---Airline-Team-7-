@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macro.html" as macros %}
+
+{% block title %}Read Role{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Hello, {{ current_user.user_username }}</h1>
+</div>
+    <div class="col-md-4">
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}
