@@ -23,3 +23,5 @@ pip install -r requirements.txt
 
 run manager.py
 
+if want to test all function please run a.sql file.
+
