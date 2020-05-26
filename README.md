@@ -14,7 +14,7 @@ MYSQL : Mysql workbench
 ## Step to run:
 use mysql workbench create table call "airline"
 
-type pip install requirements.txt in command
+type pip install -r requirements.txt in command
 
 run manager.py
 
