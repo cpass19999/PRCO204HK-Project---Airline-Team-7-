@@ -13,6 +13,7 @@ MYSQL : Mysql workbench
 
 ## Step to run:
 use mysql workbench create table call "airline"
+
 The `requirements.txt` file should list all Python libraries that your notebooks
 depend on, and they will be installed using:
 
