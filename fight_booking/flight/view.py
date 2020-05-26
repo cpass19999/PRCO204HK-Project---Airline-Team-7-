@@ -180,7 +180,8 @@ def book_confirm():
     if form.validate_on_submit():
         if form.confirmPay:
             book.paid = True
-            flash('Your order is confirmed and paid')
+            return redirect(url_for('main.payment'))
+            #flash('Your order is confirmed and paid')
         else:
             flash('Your order is confirmed')
 
