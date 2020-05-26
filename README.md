@@ -7,5 +7,4 @@ YouTube Video Link:
 Pip version: 8.1.1
 Python version: python 3.8
 MYSQL : Mysql workbench
-Operating System: Ubuntu 15.10
 
